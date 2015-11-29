@@ -1,0 +1,12 @@
+-- pega tramites das estatisticas
+select distinct(tmt_idtramite) from SI_estatisticatramite;
+
+-- monta update pra atualizar competencia usando os tramites acima
+select -- t.tmt_nome, pj.cpt_idcompetencia, pj.ppj_regiao, pj.ppj_tipo, a.*, 
+concat("update SI_historicopj set cpt_idcompetencia=",pj.cpt_idcompetencia,",hpj_regiao=",ppj_regiao," where hpj_idhistoricopj=",a.hpj_idhistoricopj," limit 1;")
+from SI_historicopj a JOIN SI_tramite t on (a.tmt_idtramite=t.tmt_idtramite) JOIN SI_processopj pj on (a.ppj_idprocessopj=pj.ppj_idprocessopj)
+where (a.tmt_idtramite in (678300010,678300020,678300030,678300040,678300050,678300060,678300070,678300080,678300090,678300100,678300110,678300120,678300130,678300140,678300150,678300160,678300170,678300180,678300190,
+678300200,678300220,678300230,678300240,678300250,678300260,678300280,678300290,678300300,678300310,678300320,678300330,678300360,678300370,678300390,678300429,678300430,678300431,678300432,
+678300433,678300434,678300435,678300436,678300437,678300438,678300440,678300441,678300444,678301000)) and
+(a.cpt_idcompetencia is null or a.cpt_idcompetencia=0 or a.cpt_idcompetencia='' or a.hpj_regiao is null or a.hpj_regiao=0 or a.hpj_regiao='')
+and a.hpj_dtinc>='2013-01-01' and a.hpj_dtinc<='2013-09-31 23:59:59' and tmt_nome!='Documento inserido';  

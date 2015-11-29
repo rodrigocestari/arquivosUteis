@@ -1,0 +1,10 @@
+truncate table CO_andamentoclasse;
+insert into CO_andamentoclasse (co_andamento_seq,co_tipo_seq)
+SELECT a.seq, t.seq
+FROM CO_andamento a, CO_tipo t
+WHERE t.status = '1' OR t.seq IN (
+SELECT distinct p.tipo
+FROM CO_processo p
+WHERE p.status<>'0' AND p.status<>'4' AND p.tipo=t.seq)
+ORDER BY a.seq, t.seq;
+   

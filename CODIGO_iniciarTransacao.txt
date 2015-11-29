@@ -1,0 +1,11 @@
+  	 gExecutaSQL( "START TRANSACTION", $conexaoBD ); 
+     
+     $sSQL = "update AG_agenda
+     		  set age_statusmonitor = $iNovoStatus 
+     		  where age_idagenda = $iIdAgenda";
+     if( gExecutaSQL($sSQL) ){
+     	gExecutaSQL( "COMMIT", $conexaoBD );
+     	$bSucesso = true;
+     }
+     else
+     	gExecutaSQL( "ROLLBACK", $conexaoBD );

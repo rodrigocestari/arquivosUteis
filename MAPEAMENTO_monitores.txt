@@ -1,0 +1,8 @@
+- Iniciar criação de monitores para funcionalidades críticas
+	- monitor de integrações
+	- monitor de assinaturas/PDDEs
+	- monitor de bkps
+	- monitor de espaço em disco nas VMs - geral e por diretorio (tmp,backup)
+	- monitor do delphos
+	- monitor do PELE
+	- monitor do conversor PDF

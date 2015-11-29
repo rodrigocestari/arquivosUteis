@@ -1,0 +1,91 @@
+﻿PJE INSTALACAO
+
+
+-- HABILITAR/DESABILITAR MENUS e TAREFAS
+-- Desabilitar/habilitar tarefas de acordo com a interoperabilidade
+UPDATE CC_tarefa SET tar_ativo='N' WHERE tar_script='tarefa_peticoes_pje_pendentes.php' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_tarefa SET tar_ativo='N' WHERE tar_script='tarefa_peticoes_pje_enviadas.php' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_tarefa SET tar_ativo='S' WHERE tar_script='tarefa_peticoes_pje_pendentes.php' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_tarefa SET tar_ativo='S' WHERE tar_script='tarefa_peticoes_pje_enviadas.php' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+
+
+-- Desabilitar/habilitar tarefas de acordo com a interoperabilidade
+UPDATE CC_menu SET men_ativo='N' WHERE men_titulo='Credenciais PJE' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='N' WHERE men_titulo='Cadastrar Credenciais' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='N' WHERE men_titulo='PJE-JT' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='N' WHERE men_titulo='Processo PJE' AND 0=(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='S' WHERE men_titulo='Credenciais PJE' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='S' WHERE men_titulo='Cadastrar Credenciais' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='S' WHERE men_titulo='PJE-JT' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+UPDATE CC_menu SET men_ativo='S' WHERE men_titulo='Processo PJE' AND 0<>(SELECT COUNT(1) FROM CC_tribunalinterop);
+
+
+
+-- acerta permissões para os tipos de documentos peça processual
+
+SELECT         b.tdc_idtipodocumentopermissao, td.tdc_idtipodocumento, td.tdc_nome , a.per_titulo, tdc.tcl_nome, ac.aca_idacao, ac.aca_nome
+         FROM 
+         	PE_tipodocumento td
+	         LEFT JOIN PE_tipodocumentoacao b ON  b.tdc_idtipodocumento = td.tdc_idtipodocumento
+	         LEFT JOIN PE_acao ac ON (ac.aca_ativo = 'S' AND ac.aca_idacao=b.aca_idacao)
+	         inner join CC_perfil a ON (a.per_idperfil=b.per_idperfil AND (a.per_titulo !='Procurador' AND a.per_titulo !='Administrador'))
+	         INNER JOIN CC_sistema c ON (c.sis_id = a.sis_id AND c.sis_codigo = 'PE')
+	         inner join PE_tipodocumentoclassificacao tdc ON (tdc.tcl_idtipodocumentoclassificacao=td.tcl_idtipodocumentoclassificacao)
+         WHERE 
+         td.tdc_ativo = 'S' AND tdc.tcl_nome='Peça Processual' AND ac.aca_idacao = '3'
+         ORDER BY td.tdc_nome;
+
+UPDATE PE_tipodocumentoacao t SET t.aca_idacao = '2' WHERE  t.tdc_idtipodocumento IN 
+         (
+			SELECT          td.tdc_idtipodocumento
+	         FROM 
+	         	PE_tipodocumento td
+		         inner join PE_tipodocumentoclassificacao tdc ON (tdc.tcl_idtipodocumentoclassificacao=td.tcl_idtipodocumentoclassificacao)
+	         WHERE 
+	         td.tdc_ativo = 'S' AND tdc.tcl_nome='Peça Processual' 
+	     )           
+         AND t.per_idperfil IN
+         (
+			SELECT          a.per_idperfil
+	         FROM 
+		         CC_perfil a
+		         INNER JOIN CC_sistema c ON (c.sis_id = a.sis_id AND c.sis_codigo = 'PE')
+		         WHERE  a.per_titulo !='Procurador' AND a.per_titulo !='Administrador'
+         )
+         AND t.aca_idacao = '3' ;
+
+-- Torna assinatura obrigatória para todas as peças processuais         
+UPDATE PE_tipodocumento  
+SET tdc_assinatura = 'OBRIGATORIA'
+WHERE tcl_idtipodocumentoclassificacao IN 
+         (
+			SELECT          tdc.tcl_idtipodocumentoclassificacao
+	         FROM PE_tipodocumentoclassificacao tdc 
+	         WHERE 
+	          tdc.tcl_nome='Peça Processual' 
+	     )     
+	     AND tdc_ativo = 'S'      ;      
+-- excli formatos diferentes de pdf e html
+
+DELETE FROM PE_tipodocumentoformato  WHERE tdc_idtipodocumento IN 
+         (
+			SELECT          td.tdc_idtipodocumento
+	         FROM 
+	         	PE_tipodocumento td
+		         inner join PE_tipodocumentoclassificacao tdc ON (tdc.tcl_idtipodocumentoclassificacao=td.tcl_idtipodocumentoclassificacao)
+	         WHERE 
+	         td.tdc_ativo = 'S' AND tdc.tcl_nome='Peça Processual' 
+	     )   
+	     AND far_idformatoarquivo NOT IN 
+	     (
+				SELECT f.far_idformatoarquivo FROM PE_formatoarquivo f 
+				WHERE f.far_ext IN ('.pdf', '.htm', '.html') AND f.far_ativo='S'   ORDER BY f.far_ext	     
+	     );
+		 
+		 
+		 
+desativar a inserção de .doc, .rtf e .odt para os tipos de docs: Ciência de Decisão , Cota e Parecer quando entrar na prt1
+
+
+
+

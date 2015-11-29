@@ -1,0 +1,55 @@
+﻿CORRECOES até 31/08/2015 (atualizado nesta data os phps de dist geral, prevencao e redist) :
+prt1,prt2,prt3,prt4,prt5,prt6,prt7,prt8,prt9,prt10,prt11,prt12,prt13,prt14,prt15,prt16,prt17,prt18,prt19,prt20,prt21,prt22,prt23,prt24
+
+
+
+-- encontra casos de processo sem o movimento de DISTRIBUICAO
+select @cfd_id:=cfd_id from CC_configuracaodefinicao where cfd_identificacao='CODIN_BANCA_DEFAULT';
+select @cfe_valor:=cfe_valor from CC_configuracaogeral where cfd_id=@cfd_id;
+select @iddist:=seq from CO_andamento where alias='DISTRIBUICAO';
+select @idredist:=seq from CO_andamento where alias='REDISTRIBUICAO';
+
+select * from CO_processo a 
+where a.distribuido=1 and a.`status` not in (0,4) and a.data_autua>='2015-08-18' and 
+(banca is not null and banca<>@cfe_valor) and tipo not in (678900010,678900070)
+and processo not in (select processo from CO_historico where status=1 and andamento in (@iddist,@idredist));
+
+/*
+select * from CO_historico where processo=86993;
+select * from CO_processo where processo=86993;
+select * from CO_tipo;
+select * from CO_distribuicao a where a.dis_id=34637;
+select * from CO_distitem a where a.dis_id=34637;
+select * from CO_distindice a where a.dis_id=34637;
+desc CO_historico
+*/
+
+-- pega valores do processo antes da insercao
+set @processo = 87203;
+
+select @situacao:=situacao from CO_processo where processo=@processo;
+select @situacaoprocurador:=situacaoprocurador from CO_processo where processo=@processo;
+
+-- insert distribuicao selecionando
+INSERT INTO `CO_historico` (`comentario`, `processo`, `tipo`, `datah`, `matricula`, `banca`, `procurador`,`andamento`, `status`, 
+ `dtlancamento`, `cc_usuario_seq_inc`) select 'Distribu&iacute;do',processo,tipo,datah,matricula,banca,procurador,678201190,1,'2015-08-07 14:20:54',a.cc_usuario_seq_inc 
+from CO_historico a,PE_documento b,PE_tipodocumento c where processo=@processo and andamento=678201210 and status=1 and a.dce_iddocumento=b.dce_iddocumento 
+and b.tdc_idtipodocumento=c.tdc_idtipodocumento and c.tdc_alias='certidaodistribuicaoconclusao' order by a.seq asc limit 1;
+
+select @iddistr:=max(seq) from CO_historico where processo=@processo;
+
+-- atualiza processo
+UPDATE CO_processo SET situacao=@situacao, situacaoprocurador=@situacaoprocurador WHERE processo=@processo; 
+
+-- insere prazo 
+INSERT INTO CO_prazo (`apz_idandamentoprazo`, `co_processo_processo`, `co_historico_seq`, `co_andamento_seq`, `pzo_dtprazo`, `pzo_dtinc`,
+`pzo_ativo`) VALUES (1, @processo, @iddistr, 678201190, '2015-08-19', '2015-08-07', 'S');
+
+
+-- insert distribuicao
+-- INSERT INTO `CO_historico` (`comentario`, `processo`, `tipo`, `datah`, `matricula`, `banca`, `procurador`,`andamento`, `status`, 
+-- `dtlancamento`, `cc_usuario_seq_inc`) VALUES ('Distribu&iacute;do', 86993, 678900080, '2015-07-02 15:41:55', '60053771', 14, 102, 678201190, 1, '2015-07-30 14:20:54',  426);
+ 
+-- select * from CO_prazo order by pzo_idprazo desc limit 10;
+-- select * from CO_andamentoprazo a order by a. pzo_idprazo desc limit 10
+

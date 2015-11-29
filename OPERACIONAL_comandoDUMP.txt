@@ -1,0 +1,1 @@
+mysqldump -u USUARIO_MYSQL -p --skip-add-locks --skip-opt --create-options --extended-insert --set-charset -R -B NOME_BD >dump-prd.sql 

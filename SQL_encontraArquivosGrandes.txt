@@ -1,0 +1,13 @@
+//verifica arquivos grandes
+
+select * 
+from PE_arquivo a,PE_documento b 
+where a.dce_iddocumento=b.dce_iddocumento and
+a.aqe_ativo='S' and a.aqe_situacaoassinatura='PENDENTE' 
+and b.dce_bytesemdisco > 1000100
+and b.dce_ativo='S'
+and aqe_caminhooriginal not like '%extrato%' and aqe_caminhooriginal not like '%anexo%' and aqe_caminhooriginal not like '%.pdf%' and aqe_caminhooriginal not like '%.html%'
+and aqe_dtinc>='2015-10-19 00:00'
+order by b.dce_bytesemdisco
+
+

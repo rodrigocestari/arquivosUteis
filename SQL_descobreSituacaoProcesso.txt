@@ -1,0 +1,30 @@
+SET @idprocesso = 69341;
+
+-- dados do procedimento
+select a.distribuido, a.regiao_distr, a.oficio, a.banca, a.regiao, b.regiao, a.situacao, a.situacaoprocurador, a.situacaodata, c.descricao, a.`status`, a.`virtual`, a.legadofisico, a.ess_idestantesetor, a.esu_idestanteusuario, a.ult_historicoexibicao
+from CO_processo a, CO_banca b, CO_status_processo c
+where
+a.`status`=c.`status` and
+a.banca=b.seq and
+a.processo=@idprocesso;
+
+-- historico do procedimento
+select a.datah, a.seq, a.comentario, a.status, a.andamento, b.andamento, b.alias, b.classificacao
+from CO_historico a inner join CO_andamento b on a.andamento=b.seq
+where a.processo=@idprocesso order by a.datah desc, a.seq desc;
+
+-- historico do procedimento
+select b.classificacao, a.*
+from CO_historico a, CO_andamento b
+where a.andamento=b.seq and a.processo=@idprocesso order by a.datah desc;
+
+-- historico de posse do procedimento pelo usuario
+select b.pcd_seqorigem,a.*,c.usuario from PE_estanteusuario a, PE_procedimentoadministrativo b, CC_usuario c where a.pel_idprocessoeletronico=b.pel_idprocessoeletronico and a.cc_usuario_seq=c.seq and b.pcd_seqorigem=@idprocesso;
+
+-- historico de posse do procedimento pelo setor
+select b.pcd_seqorigem,a.*,c.setor from PE_estantesetor a, PE_procedimentoadministrativo b, CC_setor c where a.pel_idprocessoeletronico=b.pel_idprocessoeletronico and a.cc_setor_seq=c.seq and b.pcd_seqorigem=@idprocesso;
+
+-- historico de legado
+select c.*, b.andamento, a.datah, a.dtlancamento, a.status, a.dtcancelamento
+from CO_historicolegadofisico c, CO_historico a, CO_andamento b
+where a.andamento=b.seq and c.hlf_idhistorico=a.seq and c.hlf_processo=@idprocesso;

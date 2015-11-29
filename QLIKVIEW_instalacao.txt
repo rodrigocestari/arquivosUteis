@@ -1,0 +1,10 @@
+﻿1. instalar qlikview personal edition
+2. licenciar no menu "Preferencias do usuario", aba licenca: 
+	qlikview licença = 4608 5609 8862 9375
+	numero controle = 19907 
+3. instalar ODBC driver do mysql do windows : https://dev.mysql.com/downloads/connector/odbc/
+4. criar "fonte de dados" no windows para o mysql
+4. criar estrutura de pastas :
+	qlikview/projeto/paineis
+					/QVDs Extraidos
+					/QVDs Transformados

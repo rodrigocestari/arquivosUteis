@@ -1,0 +1,30 @@
+
+-- insere setor generico
+-- INSERT INTO CC_setor (`setor`, `nomeimpressora`, `emailsetor`, `protocolo_sistema`, `set_exibe_relatorio`, `aceitafuncionario`, `exibemptd`) VALUES ('Setor de Gestores do Sistema', '', '', 0, 'N', 'N', 'N');
+
+-- pega ID setor
+select @idsetor:=seq from CC_setor where setor='Setor de Gestores do Sistema';
+
+
+
+-- insere CC_usuario
+INSERT INTO `CC_usuario` (`usuario`, `email`, `matricula`, `setor`, `cargo`, `status`, `regional`, `dtaltera`, 
+`observacao`,`veprivilegio`, `sexo`, `biprivilegio`, `liprivilegio`, `cpprivilegio`, `pxprivilegio`, `seprivilegio`, `senha`, `rhprivilegio`, `jor_id`, `dtadmissao`,
+ `fuc_idfuncaocomissionada`,`inprivilegio`, `responsavel`, `alterou_senha`, `condutor`, `usuario_ldap`, `exibeRH`)
+  VALUES ('Rodrigo Medeiros', '', '60024518', @idsetor, 6, 1, 1, '2015-11-04', '', 
+	'U', '', 'N', 'N', 'N', 'N', 'U', '', 3, 0, '2015-11-04', 0, 1, 372, 'N', 'n', 'rodrigo.medeiros','N');
+
+-- pega ID	 
+select @iduser:=seq from CC_usuario where usuario_ldap='rodrigo.medeiros';	 
+
+-- seta senha
+update CC_usuario set senha=md5('123') where seq=@iduser limit 1;
+
+-- insere perfis igual da ccr
+insert into CC_usuarioperfil (cc_usuario_seq,per_idperfil,sis_id) select @iduser,per_idperfil,sis_id from CC_usuarioperfil a,CC_usuario b where a.cc_usuario_seq=b.seq and b.matricula='admin';
+
+-- insere como assistente de todos os oficios
+insert into CC_assistenteoficio (cc_usuario_seq,co_banca_seq,aba_dtinc,aba_ativo) select @iduser,seq,'2015-11-04 15:08:38','S' from CO_banca where status=1;
+
+
+

@@ -1,0 +1,103 @@
+update RE_ponto set pto_matricula=REPLACE(pto_matricula,"-","");
+update CC_procurador set matricula=REPLACE(matricula,"-","");
+update CC_usuario set matricula=REPLACE(matricula,"-","");
+update CC_usuario set usuario_ldap=REPLACE(usuario_ldap,"-","");
+update CO_auxlote set matricula=REPLACE(matricula,"-","");
+update CO_documento set matricula=REPLACE(matricula,"-","");
+update CO_etiqueta set matricula=REPLACE(matricula,"-","");
+update CO_historico set matricula=REPLACE(matricula,"-","");
+update CO_perito set per_nrmatricula=REPLACE(per_nrmatricula,"-","");
+update CO_perito set per_nrmatricularesponsavel=REPLACE(per_nrmatricularesponsavel,"-","");
+update CO_pj set matricula=REPLACE(matricula,"-","");
+update CO_pj_lote set matricula=REPLACE(matricula,"-","");
+update CO_processojuntado set id_usuario=REPLACE(id_usuario,"-","");
+update CO_termo set matricula=REPLACE(matricula,"-","");
+update CO_tmp_user set matricula=REPLACE(matricula,"-","");
+
+select * from CC_usuario where matricula='acsm'
+update CC_usuario set matricula='50020315' where matricula='acsm';
+update CC_usuario set usuario_ldap='50020315' where matricula='usuario_ldap';
+
+
+
+
+
+update CC_usuario set matricula='50020315' where matricula='acsm';
+update CC_usuario set usuario_ldap='50020315' where usuario_ldap='acsm';
+update CC_procurador set matricula='50020315' where matricula='acsm';
+update CO_auxlote set matricula='50020315' where matricula='acsm';
+update CO_documento set matricula='50020315' where matricula='acsm';
+update CO_etiqueta set matricula='50020315' where matricula='acsm';
+update CO_historico set matricula='50020315' where matricula='acsm';
+update CO_perito set per_nrmatricula='50020315' where per_nrmatricula='acsm'; 
+update CO_perito set per_nrmatricularesponsavel=='50020315' where per_nrmatricularesponsavel='acsm';
+update CO_pj set matricula='50020315' where matricula='acsm';
+update CO_pj_lote set matricula='50020315' where matricula='acsm';
+update CO_processojuntado set id_usuario='50020315' where id_usuario='acsm';
+update CO_termo set matricula='50020315' where matricula='acsm';
+update CO_tmp_user set matricula='50020315' where matricula='acsm';
+
+
+update CC_usuario set matricula='60056762' where matricula='alat';
+update CC_usuario set usuario_ldap='60056762' where usuario_ldap='alat';
+update CC_procurador set matricula='60056762' where matricula='alat';
+update CO_auxlote set matricula='60056762' where matricula='alat';
+update CO_documento set matricula='60056762' where matricula='alat';
+update CO_etiqueta set matricula='60056762' where matricula='alat';
+update CO_historico set matricula='60056762' where matricula='alat';
+update CO_perito set per_nrmatricula='60056762' where per_nrmatricula='alat'; 
+update CO_perito set per_nrmatricularesponsavel=='60056762' where per_nrmatricularesponsavel='alat';
+update CO_pj set matricula='60056762' where matricula='alat';
+update CO_pj_lote set matricula='60056762' where matricula='alat';
+update CO_processojuntado set id_usuario='60056762' where id_usuario='alat';
+update CO_termo set matricula='60056762' where matricula='alat';
+update CO_tmp_user set matricula='60056762' where matricula='alat';
+
+
+update CC_usuario set matricula='60050462' where matricula='ios';
+update CC_usuario set usuario_ldap='60050462' where usuario_ldap='ios';
+update CC_procurador set matricula='60050462' where matricula='ios';
+update CO_auxlote set matricula='60050462' where matricula='ios';
+update CO_documento set matricula='60050462' where matricula='ios';
+update CO_etiqueta set matricula='60050462' where matricula='ios';
+update CO_historico set matricula='60050462' where matricula='ios';
+update CO_perito set per_nrmatricula='60050462' where per_nrmatricula='ios'; 
+update CO_perito set per_nrmatricularesponsavel=='60050462' where per_nrmatricularesponsavel='ios';
+update CO_pj set matricula='60050462' where matricula='ios';
+update CO_pj_lote set matricula='60050462' where matricula='ios';
+update CO_processojuntado set id_usuario='60050462' where id_usuario='ios';
+update CO_termo set matricula='60050462' where matricula='ios';
+update CO_tmp_user set matricula='60050462' where matricula='ios';
+
+
+
+update CC_usuario set matricula='50022261' where matricula='mbef';
+update CC_usuario set usuario_ldap='50022261' where usuario_ldap='mbef';
+update CC_procurador set matricula='50022261' where matricula='mbef';
+update CO_auxlote set matricula='50022261' where matricula='mbef';
+update CO_documento set matricula='50022261' where matricula='mbef';
+update CO_etiqueta set matricula='50022261' where matricula='mbef';
+update CO_historico set matricula='50022261' where matricula='mbef';
+update CO_perito set per_nrmatricula='50022261' where per_nrmatricula='mbef'; 
+update CO_perito set per_nrmatricularesponsavel=='50022261' where per_nrmatricularesponsavel='mbef';
+update CO_pj set matricula='50022261' where matricula='mbef';
+update CO_pj_lote set matricula='50022261' where matricula='mbef';
+update CO_processojuntado set id_usuario='50022261' where id_usuario='mbef';
+update CO_termo set matricula='50022261' where matricula='mbef';
+update CO_tmp_user set matricula='50022261' where matricula='mbef';
+
+
+update CC_usuario set matricula='60059982' where matricula='nav';
+update CC_usuario set usuario_ldap='60059982' where usuario_ldap='nav';
+update CC_procurador set matricula='60059982' where matricula='nav';
+update CO_auxlote set matricula='60059982' where matricula='nav';
+update CO_documento set matricula='60059982' where matricula='nav';
+update CO_etiqueta set matricula='60059982' where matricula='nav';
+update CO_historico set matricula='60059982' where matricula='nav';
+update CO_perito set per_nrmatricula='60059982' where per_nrmatricula='nav'; 
+update CO_perito set per_nrmatricularesponsavel=='60059982' where per_nrmatricularesponsavel='nav';
+update CO_pj set matricula='60059982' where matricula='nav';
+update CO_pj_lote set matricula='60059982' where matricula='nav';
+update CO_processojuntado set id_usuario='60059982' where id_usuario='nav';
+update CO_termo set matricula='60059982' where matricula='nav';
+update CO_tmp_user set matricula='60059982' where matricula='nav';

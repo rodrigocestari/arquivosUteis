@@ -1,0 +1,27 @@
+select a.ppj_idprocessopj, e.dce_iddocumento as IDPARECER, f.aqe_idarquivo as IDARQUIVO, c.hpj_idhistoricopj as IDHISTORICOPJ, 
+                   c.hpj_dtinc as DTPARECER, a.ppj_idprocessopj as IDPROCESSO, 
+                   f.aqe_caminhooriginal as CAMINHOARQUIVOORIGINAL, f.aqe_caminhoconvertido as CAMINHOARQUIVOPDF, f.aqe_caminhoconvertidocomtarja AS CAMINHOARQUIVOPDFCOMTARJA, 
+                   c.hpj_responsavel as IDUSUARIO, g.aqa_caminhoassinatura as CAMINHOARQUIVOASSINATURA, 
+                   c.hpj_dtinc as DTGRAVACAOPARECER, trim(leading 0 from a.ppj_CNJnumero) as NRPROCESSO, lpad(a.ppj_CNJdigito,2,'0') as CDDVPROCESSO, a.ppj_CNJano as ANPROCESSO, a.ppj_CNJsegmento as CDPODERJUDICIARIO, 
+                   lpad(a.ppj_CNJregiao,2,'0') as CDTRTORIGEM, lpad(a.ppj_CNJorgao,4,'0') as CDCOMARCA, g.aqa_dtinc as DTASSINATURA, d.tdc_alias as TIPODOC, g.aqa_nomeassinante as PROCURADORASSINANTE 
+                   from SI_processopj a, SI_tramite b, SI_historicopj c, PE_tipodocumento d, PE_documento e, PE_arquivo f, PE_arquivoassinatura g, PE_documentosituacao h 
+                   where  a.ppj_ativo='S' and 
+                   a.ppj_tipo='ELETRONICO' and a.tmt_idtramite=b.tmt_idtramite and 
+                   b.tmt_alias='PJ_REMETIDO' and 
+                   a.ppj_idprocessopj=c.ppj_idprocessopj and 
+                   c.dce_iddocumento=e.dce_iddocumento and 
+                   c.hpj_ativo='S' and 
+                   e.tdc_idtipodocumento=d.tdc_idtipodocumento and 
+                   e.dce_ativo='S' and 
+                   e.dce_iddocumento=f.dce_iddocumento and 
+                   f.aqe_ativo='S' and 
+                   f.aqe_idarquivo=g.aqe_idarquivo and 
+                   g.aqa_ativo='S' and 
+                   e.dce_enviadoTST='N' and 
+                   h.dce_iddocumento=e.dce_iddocumento and 
+                   h.dsi_situacaoatual='S' and 
+                   c.hpj_exibirlinkdocumento='S' and 
+                   e.dce_dtinc>='2014-09-22 00:00' and 
+                   c.hpj_dtinc >= (select max(h.hpj_dtinc) from SI_historicopj h,SI_tramite t 
+                   where h.tmt_idtramite=t.tmt_idtramite and t.tmt_alias not in ('DEVOLVIDO_EXAME','ENTREGUE_EXAME') 
+                   and h.hpj_procurador is not null and h.ppj_idprocessopj = a.ppj_idprocessopj and h.hpj_ativo='S')

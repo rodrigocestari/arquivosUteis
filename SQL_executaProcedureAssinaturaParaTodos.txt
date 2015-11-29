@@ -1,0 +1,44 @@
+
+
+call pCO_atualizarsituacaotodospa()
+select u.seq from CC_usuario u where status=1inner join CC_cargo p on u.cargo=p.seq where p.tipo in ('P','S') and u.`status` = 1;
+-- seta assinatura para todos, menos estagiarios
+delimiter //
+CREATE DEFINER=`root`@`localhost` PROCEDURE procAssinaturaParaTodos()
+BEGIN
+  DECLARE done INT DEFAULT 0;
+  DECLARE idConfiguracao INT;
+  DECLARE idUsuario INT;
+  DECLARE cur1 CURSOR FOR select u.seq from CC_usuario u inner join CC_cargo p on u.cargo=p.seq where p.tipo in ('P','S') and u.`status` = 1;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+  SELECT `cfd_id` INTO idConfiguracao FROM `CC_configuracaodefinicao` WHERE `cfd_identificacao` = 'PE_ASSINATURAHABILITADA';
+  -- apaga a variável de ambiente caso existe (para atribui-la a usuários especificos logo abaixo)
+  DELETE FROM `CC_configuracaousuario` WHERE `cfd_id` = idConfiguracao;
+  OPEN cur1;
+
+  read_loop : LOOP
+      FETCH cur1 INTO idUsuario;
+
+        IF done THEN
+                 LEAVE read_loop;
+        END IF;
+        
+        DELETE FROM `CC_configuracaousuario` WHERE `cc_usuario_seq` = idUsuario;
+        INSERT INTO `CC_configuracaousuario` (`cfd_id`, `cc_usuario_seq`, `cfu_valor`) VALUES (idConfiguracao, idUsuario, 'S');
+        
+  END LOOP;
+
+  CLOSE cur1;
+END
+//
+
+delimiter ;
+
+
+CALL procAssinaturaParaTodos();
+DROP PROCEDURE procAssinaturaParaTodos;
+
+
+
+

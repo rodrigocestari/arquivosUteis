@@ -1,0 +1,76 @@
+HTTPS : entrou na prt4 dia 6/07
+
+1. Alterar variavel de configuracao de : http://arrabio.pgt.mpt.gov.br:8080/AssinadorServer/
+para https://arrabio.pgt.mpt.gov.br:8443/AssinadorServer/
+
+2. Instalar certificado no jira e alterar a chamada em global/includes/arquivoformatacao.php
+
+4. TESTES :
+
+- ok assinatura (arrabio) http://arrabio.pgt.mpt.gov.br:8080/AssinadorServer/service
+- ok delphos (maquina delphos)
+- ok pele (maquina pele)
+- ok sud/sum (maquina pele)
+- ok integracao CCR e CRJ (arrabio)
+- ok integracao protocolo
+- CDJ integracao CDJ (TST)
+- ok REST CAGED (CODIN_CAGED_REST_SERVICE) http://services.mpt.gov.br:8080/ii/resource/rest/
+- ok variaveis e configuracao com http
+- ok disparo de emails com link de pauta (acesso via TRT 15)  .htaccess em /var/www/MPTDigital na 15
+- ok indexacao do GSA
+- ok acesso externo com VPN
+- conferir CC_procuradoria quando terminar de virar na PGT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if ($_SERVER["HTTPS"]) $protocolo = "https://";
+        		else $protocolo = "http://";
+//echo "a=$ssl";
+
+
+$dns = gRetornaDNSIntegracaoPGT ($sTipoIntegracao = "", $sUnidade = "PGT_CCR");
+gRetornaProtocoloHTTP_PRTs ($sUnidade = "") {
+
+
+
+
+gObtemDocumentosProcessoEletronico: gObtemDadosDocumentoPorId:
+		//if (is_file($aDocumento["arquivo_caminhofisicoconvertidotarja"])) {
+		//	$aDocumento["arquivo_caminhofisicopreferencial"] = $aDocumento["arquivo_caminhofisicoconvertidotarja"];
+				
+		//} elseif (is_file($aDocumento["arquivo_caminhofisicoconvertido"])) {
+		//	$aDocumento["arquivo_caminhofisicopreferencial"] = $aDocumento["arquivo_caminhofisicoconvertido"];
+				
+		//} else
+		if (is_file($aDocumento["arquivo_caminhofisicooriginal"])) {
+			$aDocumento["arquivo_caminhofisicopreferencial"] = $aDocumento["arquivo_caminhofisicooriginal"];
+				
+		} else {
+			$aDocumento["arquivo_caminhofisicopreferencial"] = "";
+				
+		}
+		
+		
+gConverterListaDeDocumentosParaPDF		
+gConverterArquivoParaPDF
+
+
+
+
+	$extension = gGetFileExtension($arquivoEntrada);
+	if (!$extension) {
+		$arrayRetorno[0] = PDF_DEF_ERRO_ARQUIVO_SEM_EXTENSAO;
+		return($arrayRetorno);
+	}
+	if ($extension != 'pdf') {

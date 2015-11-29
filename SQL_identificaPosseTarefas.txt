@@ -1,0 +1,28 @@
+select a.distribuido, a.regiao_distr, a.oficio, a.banca, a.regiao, b.regiao, a.situacao
+from CO_processo a, CO_banca b
+where 
+a.banca=b.seq and
+a.processo=33826;
+
+select a.pel_idprocessoeletronico, a.cc_usuario_seq, COUNT(*)
+from PE_estanteusuario a
+where a.esu_situacao='EM PODER'
+group by a.pel_idprocessoeletronico, a.cc_usuario_seq;
+
+
+select a.datah, a.seq, a.comentario, a.status, a.andamento, b.andamento, b.alias, b.classificacao 
+from CO_historico a inner join CO_andamento b on a.andamento=b.seq
+where a.processo='33826' order by a.datah desc, a.seq desc;
+
+select b.classificacao, a.* 
+from CO_historico a, CO_andamento b 
+where a.andamento=b.seq and a.processo='33826' order by a.datah desc;
+
+-- historico de posse pelo usuario de procedimento
+select b.pcd_seqorigem,a.* from PE_estanteusuario a, PE_procedimentoadministrativo b where a.pel_idprocessoeletronico=b.pel_idprocessoeletronico and b.pcd_seqorigem='33826';
+
+
+select b.pcd_seqorigem,a.* from PE_estantesetor a, PE_procedimentoadministrativo b where a.pel_idprocessoeletronico=b.pel_idprocessoeletronico and b.pcd_seqorigem='33826';
+
+select a.seq, a.andamento, a.alias, a.classificacao, a.exigesetor, a.exigetipoperito, a.exigeassessor, a.exigedadosextras, a.designacaoautomatica, a.mudaregiao, a.status, a.tabelanacional, a.desvio
+from CO_andamento a where a.seq > 60000 order by a.classificacao, a.andamento; 

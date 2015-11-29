@@ -1,0 +1,10 @@
+select -- a.tdc_idtipodocumento,
+	--	 a.tdc_nome,
+	--	a.tdx_idtipodocumento,
+	--	a.tdc_ativo,
+	--	a.tdc_alias,
+		concat("update PE_tipodocumento set tdx_idtipodocumento=",a.tdx_idtipodocumento," where tdc_alias='",a.tdc_alias,"';")
+from PE_tipodocumento a
+where 
+a.tdx_idtipodocumento is not null and a.tdx_idtipodocumento!=0 and
+a.tdc_ativo='S'

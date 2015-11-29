@@ -1,0 +1,10 @@
+-- encontra processos distribuidos mas que foram enviados novamente e perdeu o procurador
+select a.processo,a.distribuido,a.banca,b.seq,b.banca,concat('update CO_processo set banca=',b.banca,',distribuido=1 where processo=',a.processo,' limit 1;') from CO_processo a,CO_historico b 
+where -- a.processo=13049 and 
+a.processo=b.processo and
+a.status<>0 and a.distribuido=0 and a.banca=0 and
+b.andamento=678203037 and
+b.status=1;
+
+update CO_processo set banca=2,distribuido=1 where processo=13442 limit 1;
+select processo,datah,seq,andamento,status,banca,procurador from CO_historico where processo=13442 order by datah desc,seq desc;

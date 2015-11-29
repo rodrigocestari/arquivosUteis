@@ -1,0 +1,6 @@
+-- identificar e desbloquear os PAJs nas PRTS
+UPDATE PE_processoeletronico d
+ JOIN PE_procedimentoadministrativo a on (d.pel_idprocessoeletronico=a.pel_idprocessoeletronico) and a.pcd_origem='CODIN' and  d.pel_impedeuso='S'
+ JOIN CO_processo b on (b.processo=a.pcd_seqorigem)
+ JOIN CO_tipo c on (b.tipo=c.seq) and c.sigla='PAJ'		
+SET pel_impedeuso='N';

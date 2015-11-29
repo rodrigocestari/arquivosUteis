@@ -1,0 +1,8 @@
+- Uniformizar integrações - com REST/JSON
+
+Integração existentes : 
+	Protocolo->MPTD(triagem) usando ferramenta PENTAHO
+	MPTD->Protocolo(expedicao) usando REST
+	MPTD->CCR/CRJ e viceversa usando Integrador Java R.Porto e triggers
+	MPTD/CDJ -> TST usando outro integrador Java R.Porto
+	Entre unidades MPT - usando REST

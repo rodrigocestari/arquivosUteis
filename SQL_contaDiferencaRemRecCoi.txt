@@ -1,0 +1,10 @@
+select a.ppj_idprocessopj,(select count(c.tmt_idtramite) from SI_historicopj c where a.ppj_idprocessopj=c.ppj_idprocessopj and c.tmt_idtramite IN (678300190,678300340) and c.hpj_ativo='S' and c.hpj_dtinc>='2013-01-01 00:00' and	c.hpj_dtinc<='2013-12-31 23:59') as qtdeRecebido,
+								  (select count(b.tmt_idtramite) from SI_historicopj b where a.ppj_idprocessopj=b.ppj_idprocessopj and b.tmt_idtramite IN (678300370,678300240) and b.hpj_ativo='S' and b.hpj_dtinc>='2013-01-01 00:00' and	b.hpj_dtinc<='2013-12-31 23:59') as qtdeRemetido,
+								  concat("update SI_historicopj set hpj_ativo='N' where hpj_idhistoricopj=",a.hpj_idhistoricopj,";")
+from SI_historicopj a
+where a.hpj_ativo='S' and 
+		a.hpj_dtinc>='2013-01-01 00:00' and
+		a.hpj_dtinc<='2013-12-31 23:59' 
+group by a.ppj_idprocessopj
+having qtdeRecebido!=qtdeRemetido
+order by qtdeRemetido desc;

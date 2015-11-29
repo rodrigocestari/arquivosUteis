@@ -1,0 +1,36 @@
+CSMPT
+
+Onildo
+Fred
+
+INFO GERAL
+- 10 Membros com sua estrutura de gab. e 5 servidores em secretaria
+- vol. de 10 processos/mes
+- existe um sistema legado
+- presidente é o PGT (não é relator nem revisor mas se perdurar processos dele permanecem com ele)
+
+DISTRIBUICAO
+- distribuicao com sistema de pontuacao, com compensacao, com 2 classes de pontuacao distintas
+- existe distribuicao por prevencao - análise subjetiva - , pontuada/com compensacao positiva (considera pra geral depois) 
+- ver qual distribuicao se adequa mais, a da CCR** ou das PRTS
+- ausencias devem ser consideradas, lança compensação negativa
+- redistribuição é considerada uma distribuição, ou seja, aumenta pontuacao/compensacao positiva
+
+INTEGRACOES
+- envio e recebimento de processos entre CNMP e CORREG, há a ida e volta do mesmo processo
+- documentos chegam através do protocolo, pode ser usado a triagem (integracao existente) com o protocolo para receber e juntar ou autuar
+- envio para o PGT, que encaminha para o DRH acrescentar documentos - como fazer ... protocolo expedição interna..
+
+SESSAO
+- sessões mensais ordinárias na primeira terça do mês mais sessões extraordinárias
+- voto do relator/voto do revisor/votos divergentes, entrar como minuta e finalizar durante a sessão
+- ver adequações necessárias ao painel da CCR - documentos, formato da ata
+
+
+- Mapa estatistico vai ser enviado (gasta 1 dia)
+
+- Fluxo : correg instrui, comissão designada atua inserindo docs, vai para o CSMPT atuar, pode estar para a comissão novamente, CSMPT distribui e pauta em sessão.
+PELE pode ser usado para consultar e injetar docs no processo em questao, ou criar nova funcionalidade
+
+
+

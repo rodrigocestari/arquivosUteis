@@ -1,0 +1,82 @@
+
+
+------
+update PE_tipodocumentotramite set tdt_linkobservacao='N', tdt_exibetramite='S' where
+tdt_ativo='S' AND tdt_linkobservacao='S'
+AND tdt_origem='CODIN' AND tdc_idtipodocumento IN
+(
+SELECT x.tdc_idtipodocumento
+from
+(SELECT a.tdc_idtipodocumento, b.tdc_alias, b.tdc_nome,
+GROUP_CONCAT(c.classificacao order by a.tdt_ordem) movs
+FROM PE_tipodocumentotramite a, PE_tipodocumento b, CO_andamento c
+WHERE a.tdc_idtipodocumento=b.tdc_idtipodocumento
+AND a.tdt_idtramiteorigem=c.seq AND a.tdt_ativo='S'
+AND a.tdt_origem='CODIN'
+group by a.tdc_idtipodocumento) x
+where not FIND_IN_SET('DOC',movs) );
+
+
+SELECT @id_mov:= seq from CO_andamento a where a.alias='DOC_INSERIDO' and a.status<>0 order by a.seq desc limit 1;
+
+INSERT INTO `PE_tipodocumentotramite` (`tdt_idtipodocumentotramite`, `tdc_idtipodocumento`, `tdt_dtinc`, `cc_usuario_seq_inc`, `tdt_dtalt`, `cc_usuario_seq_alt`, `tdt_dtexc`, `cc_usuario_seq_exc`, `tdt_origem`, `tdt_tipoprocesso`, `tdt_idtramiteorigem`, `tdt_linkobservacao`, `tdt_ordem`, `tdt_opcional`, `tdt_tipocargoexibicao`, `tdt_tipoassociacao`, `tdt_regraespecial`, `mod_idmodelodocumento_associado`, `tdt_ativo`, `tdt_exibetramite`, `tdt_processoaplicavel`) 
+SELECT NULL, x.tdc_idtipodocumento,  NOW(), 1, NULL, NULL, NULL, NULL, 'CODIN', 'PROCEDIMENTO ADMINISTRATIVO', @id_mov, 'S', 05, 'N', '', 'GERA MOVIMENTO', '', NULL, 'S', 'N', 'AMBOS'
+from
+(SELECT a.tdc_idtipodocumento, b.tdc_alias, b.tdc_nome,
+a.tdt_exibetramite, GROUP_CONCAT(c.classificacao order by a.tdt_ordem) movs
+FROM PE_tipodocumentotramite a, PE_tipodocumento b, CO_andamento c
+WHERE a.tdc_idtipodocumento=b.tdc_idtipodocumento
+AND a.tdt_idtramiteorigem=c.seq AND a.tdt_ativo='S'
+AND a.tdt_origem='CODIN'
+group by a.tdc_idtipodocumento) x
+where not FIND_IN_SET('DOC',movs);
+
+
+
+
+
+
+update 
+PE_tipodocumentotramite a, PE_tipodocumento b 
+set a.tdt_linkobservacao='S'
+where a.tdc_idtipodocumento=b.tdc_idtipodocumento and b.tdc_alias='peticaoeletronicaexterna' and a.tdt_ordem=10;
+
+update 
+PE_tipodocumentotramite a, PE_tipodocumento b 
+set a.tdt_ativo='N'
+where a.tdc_idtipodocumento=b.tdc_idtipodocumento and b.tdc_alias='peticaoeletronicaexterna' and a.tdt_ordem=5;
+
+update CO_andamento c set c.classificacao='DOC' WHERE c.alias='PETICAO_ELETRONICA';
+
+select @id_docs:=group_concat(a.dce_iddocumento) from CO_historico a where a.exibirlinkdocumento='N' and
+a.status=1 and a.andamento=678204006 and a.datah>='2015-06-24 18:00:00';
+
+SET @DISABLE_TRIGGERS = 1;
+
+update CO_historico a set exibirlinkdocumento='S' where FIND_IN_SET(a.dce_iddocumento,@id_docs)
+and a.exibirlinkdocumento='N' and a.status=1 and a.andamento=678204006 and a.datah>='2015-06-24 18:00:00';
+
+update CO_historico a set a.status=0 where FIND_IN_SET(a.dce_iddocumento,@id_docs)
+and a.exibirlinkdocumento='S' and a.status=1 and a.andamento=678201210 and a.datah>='2015-06-24 18:00:00';
+
+SET @DISABLE_TRIGGERS = NULL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

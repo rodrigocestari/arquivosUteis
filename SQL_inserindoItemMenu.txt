@@ -1,0 +1,14 @@
+
+
+-- INSERINDO NO MENU MONITOR ASSINATURA
+
+-- Inserir um menu Integração CCR
+INSERT INTO CC_menu (sis_id, men_idmenu_pai, men_ordem, men_alias, men_titulo, men_descricao, men_titulopagina, men_url, men_urlimagem, men_ativo, men_target, men_eventojs) 
+VALUES (@sis_id, @idmenu_pai, 3, '', 'Monitor Assinatura', 'Monitor Assinatura', '', 'http://arrabio.pgt.mpt.gov.br:8080/AssinadorServer/acompanhamento.jsp?nome=', '', 'S', '_blank', NULL);
+
+-- Obter o id do menu inserido acima
+SELECT @idmenu_assinador:=MAX(men_idmenu) FROM CC_menu;
+SELECT @acaomonit:=MAX(aco_idacao) FROM CC_acao where aco_identificacao='IF_ADM_MONITOR';
+
+-- Ligar ação criada ao menu
+INSERT INTO CC_menuacao (men_idmenu,aco_idacao) VALUES (@idmenu_assinador, @acaomonit);

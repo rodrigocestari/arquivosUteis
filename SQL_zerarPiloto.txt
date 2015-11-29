@@ -1,0 +1,7 @@
+-- guardar
+truncate table CC_usuariobanco;
+truncate table CC_usuarioendereco;
+truncate table CO_monitoraprocesso;
+update CC_usuario set cpf='',observacao='';
+select CONCAT("update CC_usuario set usuario='",usuario,"' where seq=",seq,";") from CC_usuario where cargo in (3,17,55);
+select CONCAT("update CC_procurador set procurador='",procurador,"' where seq=",seq,";") from CC_procurador;

@@ -1,0 +1,16 @@
+1. documento fisico chega na prt e eh cadastrado no protocolo
+	1.1 se chegar por email, servidor cadastra no protocolo
+	1.2 se chegar via site (seja centralizado ou da PRT) deve cair tb no protocolo (SITE : aqui cada PRT deverá alterar seu site para fazer o registro no protocolo caso a solucao centralizada demore)
+2. no caso 1.1, servidor do protocolo direciona à codin via sistema de protocolo
+   no caso 1.1 e 1.2, que cai direto no sistema do protocolo, o direcionamento à codin seria automatico
+3. documento chega do protocolo direcionado à codin, via integracao e cai na tela de triagem no mptdigital (MPTD : tela a ser criada)
+4. na tela de triagem, servidor da codin clica numa opcao para dar recebimento/internalizar
+
+5. se for denuncia, cai nas tabelas CO_denuncia
+6. da CO_denuncia, terá a tarefa na tela inicial do mptd que mostra denuncias pendentes de analise do coordenador (visivel ao coordenador e ao secretario)
+7. coordenador atua dizendo se rejeita ou nao, passando a ficar disponivel a secretaria para autuar e gerar a certidao de autuacao (MPTD : etapas prontas, conferir)
+8. se rejeitado, atualiza o protocolo com esse status, se autuado, tb atualiza o protocolo mas com o numero do processo (INTEGRACAO : a fazer)
+
+5.1 se for juntada, o sistema insere o documento no processo informado (numero informado no protocolo ou na tela de triagem ?)
+6. atualiza o protocolo com o numero do processo ao qual foi juntado (caso o numero seja informado na tela de triagem)
+

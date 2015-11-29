@@ -1,0 +1,68 @@
+1)parâmetros do my.cnf (aplicado)
+table_cache = 2048
+max_allowed_packet = 32M
+query_cache_size = 128M
+sort_buffer_size = 32M
+join_buffer_size = 8M
+key_buffer_size = 256M
+thread_cache_size = 24
+innodb_buffer_pool_size = 8G (deu problema)
+innodb_flush_log_at_trx_commit = 2 (nao aplicado)
+
+
+
+
+
+2)mysqlcheck -psenha -uroot -ao --auto-repair PRTxx
+a analisa (faz umas pré-cargas pra ajudar o mysqld)
+o otimiza (faz uns pré-caches e ajustas umas tabelas internas de performance)
+--auto-repair - corrige silenciosamente
+
+
+
+3)índices
+documentacao/database/drop.indexes_nonprimary_nonforeign.sql
+documentacao/database/criaIndices.sql
+
+-- se a VM não tiver o mk-duplicate
+cd /usr/local/bin
+wget http://www.maatkit.org/get/mk-duplicate-key-checker 
+chmod +x mk-duplicate-key-checker
+
+# Deleta indices
+sed s/XXXX/PRT10/g drop.indexes_nonprimary_nonforeign.sql > /tmp/d1.sql
+mysql information_schema < /tmp/d1.sql > /tmp/drop1.sql
+mysql -p -uroot PRT10 < /tmp/drop1.sql
+	
+# Elimina duplicados
+mk-duplicate-key-checker -p -uroot --databases PRT10 > /tmp/duplicate.sql
+mysql -p -uroot PRT10 < /tmp/duplicate.sql
+	
+# Aplica novos 
+mysql -p -uroot PRT10 < /var/www/global/documentacao/migra_para_2.0_PRT10/criaIndices.sql
+
+
+
+
+4) deflate de html (aplicado)
+/etc/httpd/conf/httpd.conf
+
+Certificar que o modulo está habilitado (sempre está)
+LoadModule deflate_module modules/mod_deflate.so
+
+Depois, sob a configuração do site (pode ser no doc root); 
+é interessante filtrar pra ele não sair compactando o já compactado, tipo jpg, mp4, etc...
+
+Ainda no /etc/httpd/conf/httpd.conf (pode ser no fim ou depois do directory root)
+
+<IfModule mod_deflate.c>
+<FilesMatch ".(js|css|html|htm|php|xml|xslt)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+</IfModule>
+
+# service httpd reload
+
+Testar com o firebug: (o highslide.css abaixo não gzipado tem 21k e foi pra 1k!; 
+acho que os ganhos são nas respostas php dinâmicas; 
+as estáticas como esta ficam no cache do navegador)

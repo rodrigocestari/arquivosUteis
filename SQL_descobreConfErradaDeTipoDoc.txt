@@ -1,0 +1,27 @@
+-- pega tipos de documentos que NAO tenham DOCUMENTO INSERIDO e que nao tenham nenhum movimento com exibirlink - SIM
+select distinct(a.tdc_idtipodocumento), b.tdc_nome 
+from PE_tipodocumentotramite a, PE_tipodocumento b
+where a.tdt_origem='CODIN' and 
+a.tdt_ativo='S' and 
+a.tdc_idtipodocumento=b.tdc_idtipodocumento and 
+b.tdc_ativo='S' and
+-- a.tdt_linkobservacao='N' and
+a.tdc_idtipodocumento not in (select distinct(tdc_idtipodocumento)
+										from PE_tipodocumentotramite a 
+										where a.tdt_origem='CODIN' and
+										a.tdt_ativo='S' and (a.tdt_idtramiteorigem in (678201210)))
+and 
+a.tdc_idtipodocumento not in (select distinct(tdc_idtipodocumento)
+										from PE_tipodocumentotramite a 
+										where a.tdt_origem='CODIN' and
+										a.tdt_ativo='S' and a.tdt_linkobservacao='S');
+
+-- pega tipos de documentos que tenham 2 ou mais movimentos configurados para exibir link de documento
+select a.tdc_idtipodocumento , b.tdc_nome, count(a.tdc_idtipodocumento) as QTDE
+from PE_tipodocumentotramite a, PE_tipodocumento b
+where a.tdt_origem='CODIN' and 
+a.tdt_ativo='S' and 
+a.tdc_idtipodocumento=b.tdc_idtipodocumento and 
+a.tdt_ativo='S' and	
+a.tdt_linkobservacao='S' 
+group by a.tdc_idtipodocumento having QTDE>1;

@@ -1,0 +1,22 @@
+select concat('SHOW INDEX FROM ',table_name,';') 
+from information_schema.tables where table_schema = database();  
+
+
+select constraint_schema as BASE,
+		 table_name as TABELA,
+	    constraint_name as INDICE
+from information_schema.TABLE_CONSTRAINTS
+where table_schema = database()
+and CONSTRAINT_TYPE = 'UNIQUE'
+
+
+
+select TABLE_SCHEMA as BASE,
+       TABLE_NAME as TABELA,
+		 INDEX_NAME as INDICE,
+		 COLUMN_NAME AS COLUNA,
+		 INDEX_TYPE AS TIPO
+from  information_schema.STATISTICS
+where table_schema = database()
+and INDEX_NAME <> 'PRIMARY'
+order by BASE, TABELA, INDICE

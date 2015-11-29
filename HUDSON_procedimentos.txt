@@ -1,0 +1,30 @@
+PROCEDIMENTOS PARA HABILITAR O HUDSON A ATUALIZAR UMA UNIDADE 
+
+- copiar as chaves em var/lib/hudson/.ssh  no servidor hudson
+- deixar as permissões nos arquivos de chaves iguais as outras chaves.. chmod 600 _id*
+- logado lá no servidor do hudson pelo ssh executa o comando.. 
+	ssh -i /var/lib/hudson/.ssh/id_rsa_prt15 root@ip_servidor_producao_prt15 
+
+Link Sistema :
+mptdigital-deploy.mpt.gov.br:8080/
+
+Documento controle :
+homologacao/projetos/0066-MPTDigital/trunk/02-Projetos/01-GestaoProjeto/01-Planos/Implantacao-Versao2/Situacao.xls
+
+Acesso Hudson SVN :
+user: hudson
+senha: hudson
+
+Máquina; mptdigital-piloto2.pgt.mpt.gov.br
+usuário: desenv
+senha: desenv@.
+
+Máquina; mptdigital-deploy.mpt.gov.br
+usuário: hudson
+senha: hudson@.
+
+
+
+
+
+

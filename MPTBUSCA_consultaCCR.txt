@@ -1,0 +1,51 @@
+ -- SQL CCR usado no MPTBUSCA
+ 
+ SELECT  
+    dce.dce_iddocumento , 
+    conf.cfg_numeral_regional*1000000000000+dce.dce_iddocumento as IDDOCUMENTO, 
+    CONCAT('https://',pcr.pcr_ipservidor,'/processoEletronico/documentos/baixar_processo_eletronico.php', CHAR(63) ,'op=baixarDoc&','idArquivo=',aqe.aqe_idarquivo,'&codigoAcesso=', aqe.aqe_codigoacesso ) AS BLARQUIVO,
+    DATE_FORMAT(dsi.dsi_dtinc, '%d/%m/%Y') AS DATA_INCLUSAO, 
+
+    tdc.tdc_nome AS DES_TIPO_DOCUMENTO,
+    conf.cfg_numeral_regional AS REGIONAL, 
+    'PGT - CCR' AS DES_REGIONAL, 
+    'CCR' AS ORGAO,
+    IFNULL(tip.tipo,'') TIPO,
+    IFNULL(concat(tip2.sigla,' ',lpad(pro2.numero,5,'0'),'.',pro2.ano,'.',lpad(pro2.regiao,2,'0'),'.',lpad(pro2.oficio,3,'0'),'-',pro2.digito),'') AS ORIGEM,
+    IFNULL(concat(lpad(pro.numero,5,'0'),'.',pro.ano,'.',lpad(pro.regiao,2,'0'),'.',lpad(pro.oficio,3,'0'),'-',pro.digito),'') AS PROCESSO,
+    dce.dce_ativo , 
+    dce.dce_sigilo , 
+    dce.dce_justificativaexc AS 'justificativaexc', 
+    dsi.dsi_dtinc AS datainc, 
+    pr.procurador Oficio,    
+   IF((IFNULL(pac.CNJnumero,''))like'','',concat(lpad(pac.CNJnumero,8,'0'),'-',lpad(pac.CNJdigito,2,0),'.',pac.CNJano,'.',pac.CNJsegmento,'.',lpad(pac.CNJregiao,2,'0'),'.',lpad(pac.CNJorgao,4,'0'))) AS PROCESSO_JUDICIAL_CNJ ,
+  'application/pdf' as MIME,
+   dsi.dsi_dtinc AS last_modification_time       
+FROM 
+
+PE_documento dce
+LEFT JOIN  PE_arquivo aqe                        ON (dce.dce_iddocumento=aqe.dce_iddocumento)
+LEFT JOIN  PE_processoeletronicodocumento ped    ON (dce.dce_iddocumento=ped.dce_iddocumento)
+LEFT JOIN  PE_procedimentoadministrativo proad   ON (proad.pel_idprocessoeletronico = ped.pel_idprocessoeletronico)
+INNER JOIN  CO_processo pro                      ON (pro.processo = proad.pcd_seqorigem AND pro.sigilo <> '1')
+LEFT JOIN  PE_controlenumeracao ctl              ON (dce.dce_iddocumento=ctl.dce_iddocumento)
+LEFT JOIN  PE_documentosituacao dsi              ON (dce.dce_iddocumento=dsi.dce_iddocumento)
+LEFT JOIN  PE_tipodocumento tdc                  ON (dce.tdc_idtipodocumento=tdc.tdc_idtipodocumento)
+LEFT JOIN  CC_configuracao conf                  ON (1=conf.cfg_id)
+LEFT JOIN  CC_procuradoria pcr                   ON (conf.cfg_numeral_regional = pcr.pcr_numreg  )
+LEFT JOIN  PE_situacao sit                       ON (dsi.sit_idsituacao=sit.sit_idsituacao)
+LEFT JOIN  CO_tipo tip                           ON (tip.seq = pro.tipo)
+LEFT JOIN   CO_banca ba                          ON (ba.seq = pro.banca)                
+LEFT JOIN   CC_procurador pr                     ON (ba.oficial = pr.seq)    
+LEFT JOIN   CO_pa_acao pac                       ON (pac.processo = pro.processo)            
+LEFT JOIN   CO_processo pro2                     ON (pac.origem = pro2.processo)
+LEFT JOIN   CO_tipo tip2                         ON (tip2.seq = pro2.tipo)
+WHERE 
+        (aqe.aqe_ativo='S' OR aqe.aqe_ativo IS NULL) 
+AND     dsi.dsi_situacaoatual='S' 
+AND     dce.dce_sigilo='N' 
+AND     tdc.tcl_idtipodocumentoclassificacao not in (10,12)
+AND     tdc.tdc_idtipodocumento not in (280070)
+AND dce.dce_ativo = 'S'
+AND aqe.aqe_caminhooriginal not like '/documentos/'
+AND dsi.sit_idsituacao = '3' ;

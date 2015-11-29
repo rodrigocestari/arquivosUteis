@@ -1,0 +1,42 @@
+Mapeamento de funcionalidades :
+
+
+Fernando :
+- Integração protocolo-MPTD(triagem pentaho) 
+- Integração entre unidades MPT 
+- QlikView-Gaia
+- GSA - MPTBusca
+- Delphos - pesquisa, script alimentação das bases
+
+Arenhart :
+- Integração MPTD-PJE
+	
+Fagundes : 
+- Integração MPTD-Protocolo(expedição)
+
+Lineu :
+- SUD
+- MED
+- Assinador MPTD 
+
+Boechat :
+- PELE
+- CAPI
+
+Rodrigo :
+- Integrações PGT (CDJ/CCR/CRJ)
+- MPTD na CCR/CDJ/CRJ
+
+Porto :
+- Integração CDJ-TST
+
+Chorfi :
+- Painel julgamento CCR
+
+Roberto : 
+- Regras de fluxo processual
+- conversores
+
+Luciano :
+- Assinador Java (pele)
+- Manutenção/Administração PDDEs (Luciano/Divino)

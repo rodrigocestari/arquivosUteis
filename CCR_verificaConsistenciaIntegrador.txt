@@ -1,0 +1,1 @@
+os possiveis nao envios passados da ccr, http://10.0.0.4/codin/documentacao/scripts_uteis/audita_integracao_ccr.php

@@ -1,0 +1,16 @@
+-- desativa todas
+UPDATE PELE.manutencao SET status='DESATIVADA';
+
+-- insere o padrao
+/*
+INSERT INTO `manutencao` (`id_manutencao`, `mensagem`, `idsusuariosliberados`, `status`, `dtalteracao`) 
+VALUES (10, '<div style="background-color:#800; color: #FFF;padding:5px;"><font style="font-size:18pt;">AVISO</font><div style="background-color:#FFF; color: #000;padding: 10px;">Estamos em manuten&ccedil;&atilde;o tempor&aacute;ria para aprimoramento dos servi&ccedil;os. <br><br>Tente novamente mais tarde
+<br><br></div><br></div>', '', 'DESATIVADA', '2015-07-24 07:46:15');
+*/
+
+-- ativa o padrao
+UPDATE PELE.manutencao SET status='BLOQUEIA_ACESSO' where id_manutencao=10;
+
+-- desativa o padrao
+UPDATE PELE.manutencao SET status='DESATIVADA' where id_manutencao=10;
+

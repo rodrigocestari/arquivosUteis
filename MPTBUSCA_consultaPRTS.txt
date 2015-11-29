@@ -1,0 +1,156 @@
+
+
+    SELECT  
+    dce.dce_iddocumento , 
+    ctl.ctl_numeralregional*1000000000000+dce.dce_iddocumento as IDDOCUMENTO, 
+    CONCAT('https://',pcr.pcr_ipservidor,'/processoEletronico/documentos/baixar_processo_eletronico.php', CHAR(63) ,'op=baixarDoc&','idArquivo=',aqe.aqe_idarquivo,'&codigoAcesso=', aqe.aqe_codigoacesso ) AS BLARQUIVO,
+    DATE_FORMAT(dsi.dsi_dtinc, '%d/%m/%Y') AS DATA_INCLUSAO, 
+    tdc.tdc_nome AS DES_TIPO_DOCUMENTO,
+    ctl.ctl_numeralregional AS REGIONAL, 
+    upper(reg.regiao) AS DES_REGIONAL, 
+    'AGENTE' AS ORGAO,
+    IFNULL(tip.tipo,'') TIPO,
+    IFNULL(concat(tip2.sigla,' ',lpad(pro2.numero,5,'0'),'.',pro2.ano,'.',lpad(pro2.regiao,2,'0'),'.',lpad(pro2.oficio,3,'0'),'-',pro2.digito),'') AS ORIGEM,
+    IFNULL(concat(lpad(pro.numero,5,'0'),'.',pro.ano,'.',lpad(pro.regiao,2,'0'),'.',lpad(pro.oficio,3,'0'),'-',pro.digito),'') AS PROCESSO,
+    dce.dce_ativo , 
+    dce.dce_sigilo , 
+    dce.dce_justificativaexc AS 'justificativaexc', 
+    dsi.dsi_dtinc AS datainc, 
+    pr.procurador Oficio,    
+   IF((IFNULL(pac.CNJnumero,''))like'','',concat(lpad(pac.CNJnumero,8,'0'),'-',lpad(pac.CNJdigito,2,0),'.',pac.CNJano,'.',pac.CNJsegmento,'.',lpad(pac.CNJregiao,2,'0'),'.',lpad(pac.CNJorgao,4,'0'))) AS PROCESSO_JUDICIAL_CNJ ,
+  'application/pdf' as MIME       
+FROM 
+     
+     PE_documento dce
+LEFT JOIN  PE_arquivo aqe                                 ON (dce.dce_iddocumento=aqe.dce_iddocumento)
+LEFT JOIN  PE_processoeletronicodocumento ped     ON (dce.dce_iddocumento=ped.dce_iddocumento)
+LEFT JOIN  PE_procedimentoadministrativo proad     ON (proad.pel_idprocessoeletronico = ped.pel_idprocessoeletronico)
+INNER JOIN  CO_processo pro                             ON (pro.processo = proad.pcd_seqorigem AND pro.sigilo <> '1')
+LEFT JOIN  PE_controlenumeracao ctl                 ON (dce.dce_iddocumento=ctl.dce_iddocumento)
+LEFT JOIN  PE_documentosituacao dsi                 ON (dce.dce_iddocumento=dsi.dce_iddocumento)
+LEFT JOIN  PE_tipodocumento tdc                         ON (dce.tdc_idtipodocumento=tdc.tdc_idtipodocumento)
+LEFT JOIN  CC_regiao reg                                 ON (ctl.ctl_numeralptm=reg.numeral_oficio)
+LEFT JOIN  CC_procuradoria pcr                        ON (ctl.ctl_numeralregional = pcr.pcr_numreg  )
+LEFT JOIN  PE_situacao sit                             ON (dsi.sit_idsituacao=sit.sit_idsituacao)
+LEFT JOIN  CO_tipo tip                                     ON (tip.seq = pro.tipo)
+LEFT JOIN   CO_banca ba                                    ON (ba.seq = pro.banca)                
+LEFT JOIN   CC_procurador pr                             ON (ba.oficial = pr.seq)    
+LEFT JOIN   CO_pa_acao pac                                ON (pac.processo = pro.processo)            
+LEFT JOIN   CO_processo pro2                            ON (pac.origem = pro2.processo)
+LEFT JOIN   CO_tipo tip2                                 ON (tip2.seq = pro2.tipo)
+WHERE 
+        (aqe.aqe_ativo='S' OR aqe.aqe_ativo IS NULL) 
+AND     dsi.dsi_situacaoatual='S' 
+AND     dce.dce_sigilo='N' 
+AND     tdc.tcl_idtipodocumentoclassificacao not in (10,12,27,6,2,1,3,26)
+AND dce.dce_ativo = 'S'
+AND aqe.aqe_caminhooriginal not like '/documentos/'
+AND     reg.status=1
+AND dsi.sit_idsituacao = '3' 
+
+UNION
+
+SELECT 
+    dce.dce_iddocumento ,
+    ctl.ctl_numeralregional*1000000000000+dce.dce_iddocumento as IDDOCUMENTO, 
+    CONCAT('https://',pcr.pcr_ipservidor,'/processoEletronico/documentos/baixar_processo_eletronico.php', CHAR(63) ,'op=baixarDoc&','idArquivo=',aqe.aqe_idarquivo,'&codigoAcesso=', aqe.aqe_codigoacesso ) AS BLARQUIVO,
+    DATE_FORMAT(dsi.dsi_dtinc, '%d/%m/%Y') AS DATA_INCLUSAO, 
+    tdc.tdc_nome AS DES_TIPO_DOCUMENTO,
+    ctl.ctl_numeralregional AS REGIONAL, 
+    upper(reg.regiao) AS DES_REGIONAL, 
+    'INTERVENIENTE' AS ORGAO,
+    IFNULL(nat.nat_nome,'') TIPO,
+    '' AS ORIGEM,    
+   IF((IFNULL(pro.ppj_CNJnumero,''))not like'','',concat(nat.nat_sigla, ' ',lpad(pro.ppj_numero,6,'0'),'.',pro.ppj_ano,'.',org.org_sigla,'.',pro.ppj_trt,'.',pro.ppj_complemento,'/',pro.ppj_digito)) AS PROCESSO,
+    dce.dce_ativo , 
+    dce.dce_sigilo , 
+    dce.dce_justificativaexc AS 'justificativaexc', 
+    dsi.dsi_dtinc AS datainc, 
+    pr.usuario  Oficio,    
+   IF((IFNULL(pro.ppj_CNJnumero,''))like'','',concat(lpad(pro.ppj_CNJnumero,8,'0'),'-',lpad(pro.ppj_CNJdigito,2,0),'.',pro.ppj_CNJano,'.',pro.ppj_CNJsegmento,'.',lpad(pro.ppj_CNJregiao,2,'0'),'.',lpad(pro.ppj_CNJorgao,4,'0'))) AS PROCESSO_JUDICIAL_CNJ,
+  'application/pdf' as MIME   
+  
+FROM            PE_documento dce
+LEFT JOIN    SI_historicopj hpj ON hpj.dce_iddocumento = dce.dce_iddocumento
+LEFT JOIN SI_tramite tram on hpj.tmt_idtramite=tram.tmt_idtramite
+
+LEFT  JOIN  PE_arquivo aqe                                 ON (dce.dce_iddocumento=aqe.dce_iddocumento)
+LEFT  JOIN  PE_processoeletronicodocumento ped     ON (dce.dce_iddocumento=ped.dce_iddocumento)
+LEFT  JOIN  PE_pj proel                                     ON (proel.pel_idprocessoeletronico = ped.pel_idprocessoeletronico)
+INNER JOIN  SI_processopj pro                             ON (pro.ppj_idprocessopj = proel.pej_seqorigem)
+LEFT  JOIN  PE_controlenumeracao ctl                 ON (dce.dce_iddocumento=ctl.dce_iddocumento)
+LEFT  JOIN  PE_documentosituacao dsi                 ON (dce.dce_iddocumento=dsi.dce_iddocumento)
+LEFT  JOIN  PE_tipodocumento tdc                         ON (dce.tdc_idtipodocumento=tdc.tdc_idtipodocumento)
+LEFT  JOIN  CC_regiao reg                                 ON (ctl.ctl_numeralptm=reg.numeral_oficio)
+LEFT  JOIN  CC_procuradoria pcr                        ON (ctl.ctl_numeralregional = pcr.pcr_numreg  )
+LEFT  JOIN  PE_situacao sit                             ON (dsi.sit_idsituacao=sit.sit_idsituacao)
+LEFT  JOIN  SI_natureza nat                                ON (nat.nat_idnatureza = pro.nat_idnatureza)
+LEFT JOIN   SI_oficio ofc                                ON (ofc.ofc_idoficio = hpj.ofc_idoficio)
+LEFT JOIN   CC_usuario pr                             ON (hpj.hpj_procurador = pr.seq)
+LEFT JOIN   SI_orgao org                                    ON (org.org_idorgao = pro.org_idorgao)
+WHERE 
+(aqe.aqe_ativo='S' OR aqe.aqe_ativo IS NULL) 
+AND dsi.dsi_situacaoatual='S' 
+AND dce.dce_sigilo='N' 
+AND dce.dce_ativo = 'S'
+AND aqe.aqe_caminhooriginal not like '/documentos/'
+AND tdc.tcl_idtipodocumentoclassificacao not in (10,27,6,3,26)
+AND reg.status=1
+AND dsi.sit_idsituacao = '3'
+AND hpj.hpj_exibirlinkdocumento = 'S'
+AND hpj.hpj_ativo='S'
+AND dsi.dsi_dtinc > '2008-01-01'
+
+ORDER BY datainc DESC
+
+
+
+
+
+/*  BUSCA EM PAJ (RETIRADO)
+
+SELECT 
+    dce.dce_iddocumento ,
+    ctl.ctl_numeralregional*1000000000000+dce.dce_iddocumento as IDDOCUMENTO, 
+    CONCAT('http://',pcr.pcr_ipservidor,'/processoEletronico/documentos/baixar_processo_eletronico.php', CHAR(63) ,'op=baixarDoc&','idArquivo=',aqe.aqe_idarquivo,'&codigoAcesso=', aqe.aqe_codigoacesso ) AS BLARQUIVO,
+    DATE_FORMAT(dsi.dsi_dtinc, '%d/%m/%Y') AS DATA_INCLUSAO, 
+    tdc.tdc_nome AS DES_TIPO_DOCUMENTO,
+    ctl.ctl_numeralregional AS REGIONAL, 
+    reg.regiao AS DES_REGIONAL, 
+    'INTERVENIENTE' AS ORGAO,
+    concat('PAJ de ',trim(IFNULL(nat.nat_nome,''))) TIPO,
+    '' AS ORIGEM,    
+    pro.ppa_idprocessopa AS PROCESSO,
+    dce.dce_ativo , 
+    dce.dce_sigilo , 
+    dce.dce_justificativaexc AS 'justificativaexc', 
+    dsi.dsi_dtinc AS datainc, 
+    IFNULL(cast(concat(ofc.ofc_nome, ' - ', pr.procurador) AS CHAR CHARACTER SET latin1),'') Oficio,    
+   IF((IFNULL(pro.ppa_CNJnumero,''))like'','',concat(nat.nat_sigla, ' ',lpad(pro.ppa_CNJnumero,8,'0'),'-',pro.ppa_CNJdigito,'.',pro.ppa_CNJano,'.',pro.ppa_CNJsegmento,'.',lpad(pro.ppa_CNJregiao,2,'0'),'.',lpad(pro.ppa_CNJorgao,4,'0'))) AS PROCESSO_JUDICIAL_CNJ,
+  'application/pdf' as MIME       
+FROM            PE_documento dce
+INNER JOIN  PE_arquivo aqe                                 ON (dce.dce_iddocumento=aqe.dce_iddocumento)
+INNER JOIN  PE_processoeletronicodocumento ped     ON (dce.dce_iddocumento=ped.dce_iddocumento)
+INNER JOIN  PE_paj proel                                 ON (proel.pel_idprocessoeletronico = ped.pel_idprocessoeletronico)
+INNER JOIN  SI_processopa pro                             ON (pro.ppa_idprocessopa = proel.pea_seqorigem)
+INNER JOIN  PE_controlenumeracao ctl                 ON (dce.dce_iddocumento=ctl.dce_iddocumento)
+INNER JOIN  PE_documentosituacao dsi                 ON (dce.dce_iddocumento=dsi.dce_iddocumento)
+INNER JOIN  PE_tipodocumento tdc                         ON (dce.tdc_idtipodocumento=tdc.tdc_idtipodocumento)
+INNER JOIN  CC_regiao reg                                 ON (ctl.ctl_numeralptm=reg.numeral_oficio)
+INNER JOIN  CC_procuradoria pcr                        ON (ctl.ctl_numeralregional = pcr.pcr_numreg  )
+INNER JOIN  PE_situacao sit                             ON (dsi.sit_idsituacao=sit.sit_idsituacao)
+INNER JOIN  SI_natureza nat                                ON (nat.nat_idnatureza = pro.ppa_pjnatureza)
+LEFT JOIN   SI_oficio ofc                                ON (ofc.ofc_idoficio = pro.ofc_idoficio)
+LEFT JOIN   CC_procurador pr                             ON (ofc.ofc_procurador = pr.idusuario)
+LEFT JOIN   SI_orgao org                                    ON (org.org_idorgao = pro.org_idorgao)
+WHERE 
+(aqe.aqe_ativo='S' OR aqe.aqe_ativo IS NULL) 
+AND dsi.dsi_situacaoatual='S' 
+AND dce.dce_sigilo='N' 
+AND tdc.tcl_idtipodocumentoclassificacao not in (10,12,6,2,1,3)
+AND dce.dce_ativo = 'S'
+AND aqe.aqe_caminhooriginal not like '/documentos/'
+AND reg.status=1
+AND dsi.sit_idsituacao = '3'  
+;
+*/

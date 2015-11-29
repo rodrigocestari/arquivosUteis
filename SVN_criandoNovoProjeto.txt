@@ -1,0 +1,7 @@
+-- pra colocar novo projeto no piloto, via SVN
+cd /var/www/MPTDigital 
+mkdir capi 
+cd capi
+svn co http://homologacao.pgt.mpt.gov.br/svn/capi/trunk/ 
+chown apache.apache capi 
+

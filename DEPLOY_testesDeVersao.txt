@@ -1,0 +1,11 @@
+TESTES :
+
+- consulta delphos (por nome, por cnpj, por numero)
+- cadastro de denuncia via SUD
+- cadastro de MED via SUM
+- peticionamento
+- cadastro de documento em processo
+- replicação de documento em processos
+- envio de CP
+- remessa a outra unidade do mpt
+- lançamento de movimento em processo

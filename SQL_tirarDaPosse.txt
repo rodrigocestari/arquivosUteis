@@ -1,0 +1,9 @@
+UPDATE PE_estanteusuario
+			SET esu_situacao = 'LIBERADO',
+			esu_dtcheckout = NOW(),
+			cc_usuario_seq_rem = " . gPreparaDML($idUsuarioRemetente) . ",
+			esu_justificativa_rem = " . gPreparaDML($sJustificativaRemessa) . ",
+			esu_cumprindo = 'N'
+			WHERE pel_idprocessoeletronico = " . gPreparaDML($idProcessoEletronico) . "
+			AND cc_usuario_seq = " . gPreparaDML($idUsuarioPosse) . "
+			AND esu_situacao='EM PODER 

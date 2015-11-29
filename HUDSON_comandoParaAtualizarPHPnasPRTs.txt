@@ -1,0 +1,4 @@
+svn export http://homologacao.pgt.mpt.gov.br/svn/capi/trunk/consultas/index.php /var/www/MPTDigital/capi/consultas/index.php
+
+a partir da prt21 (destino) :
+svn export https://homologacao.pgt.mpt.gov.br/svn/documentacao/trunk/Releases/integradores/IntegracaoMPTDigitalWS-Client2-1.0-SNAPSHOT.one-jar.jar /root/integrador/IntegracaoMPTDigitalWS-Client2-1.0-SNAPSHOT.one-jar.jar

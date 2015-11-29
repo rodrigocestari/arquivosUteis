@@ -1,0 +1,29 @@
+SELECT
+f.procurador,
+c.andamento,
+g.apz_diasprazo,
+b.datah,
+b.dtlancamento,
+a.pzo_idprazo,
+a.pzo_dtprazo,
+DATEDIFF(a.pzo_dtprazo, b.datah) AS PERIODO,
+CONCAT('UPDATE CO_prazo SET pzo_dtprazo = ''', DATE_ADD(b.datah, INTERVAL g.apz_diasprazo DAY), ''' WHERE pzo_idprazo = ', a.pzo_idprazo, ' LIMIT 1;')
+FROM
+CO_prazo a
+INNER JOIN CO_historico b ON b.seq = a.co_historico_seq
+INNER JOIN CO_andamento c ON c.seq = b.andamento
+INNER JOIN CO_processo d ON d.processo = b.processo
+INNER JOIN CO_banca e ON e.seq = d.banca
+INNER JOIN CC_procurador f ON f.seq = e.oficial
+INNER JOIN CO_andamentoprazo g ON g.apz_idandamentoprazo = a.apz_idandamentoprazo
+WHERE
+a.pzo_ativo = 'S'
+-- AND c.andamento LIKE 'INSTAURADO IC'
+AND g.apz_tipo = 'RESOLUCAO69'
+AND DATEDIFF(a.pzo_dtprazo, b.datah) <> g.apz_diasprazo
+AND b.dtlancamento IS NOT NULL
+-- AND b.dtlancamento > b.datah
+-- AND b.dtlancamento >= '2011-05-01 00:00:00'
+-- AND DATEDIFF(a.pzo_dtprazo, b.datah) <> 366
+ORDER BY c.andamento, b.datah, f.procurador, DATEDIFF(a.pzo_dtprazo, b.datah)
+-- LIMIT 100

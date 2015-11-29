@@ -1,0 +1,115 @@
+-- denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+select count(*) from CO_processo a where a.data_autua>='2010-01-01' and a.data_autua<='2010-12-31' and tipo not in (3,678900010) and status not in (0,4);
+select count(*) from CO_processo a where a.data_autua>='2011-01-01' and a.data_autua<='2011-12-31' and tipo not in (3,678900010) and status not in (0,4);
+select count(*) from CO_processo a where a.data_autua>='2012-01-01' and a.data_autua<='2012-12-31' and tipo not in (3,678900010) and status not in (0,4);
+
+-- processos judiciais codin (PAJ codin)
+select count(*) from CO_processo a where a.data_autua>='2010-01-01' and a.data_autua<='2010-12-31' and tipo in (3,678900010) and status not in (0,4);
+select count(*) from CO_processo a where a.data_autua>='2011-01-01' and a.data_autua<='2011-12-31' and tipo in (3,678900010) and status not in (0,4);
+select count(*) from CO_processo a where a.data_autua>='2012-01-01' and a.data_autua<='2012-12-31' and tipo in (3,678900010) and status not in (0,4);
+
+-- processos judiciais coi (PJ coi) 
+select count(*) from SI_processopj a where a.ppj_dtinc>='2010-01-01' and a.ppj_dtinc<='2010-12-31';
+select count(*) from SI_processopj a where a.ppj_dtinc>='2011-01-01' and a.ppj_dtinc<='2011-12-31';
+select count(*) from SI_processopj a where a.ppj_dtinc>='2012-01-01' and a.ppj_dtinc<='2012-12-31';
+
+
+
+
+-- denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT15 - 2010 : 3905
+PRT15 - 2011 : 4449
+PRT15 - 2012 : 4928
+
+-- processos judiciais codin (PAJ codin)
+PRT15 - 2010 : 360
+PRT15 - 2011 : 551
+PRT15 - 2012 : 514
+
+-- processos judiciais coi (PJ coi) 
+PRT15 - 2010 : 18906
+PRT15 - 2011 : 21527
+PRT15 - 2012 : 24211
+
+
+----------------------------------------
+denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT01 - 2010 : 4667
+PRT01 - 2011 : 5727
+PRT01 - 2012 : 6675
+
+-- processos judiciais codin (PAJ codin)
+PRT01 - 2010 : 409
+PRT01 - 2011 : 392
+PRT01 - 2012 : 505
+
+-- processos judiciais coi (PJ coi) 
+PRT01 - 2010 : 9247
+PRT01 - 2011 : 11578
+PRT01 - 2012 : 10438
+
+---------------------------------
+denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT03 - 2010 : 3779
+PRT03 - 2011 : 5262
+PRT03 - 2012 : 5092
+
+-- processos judiciais codin (PAJ codin)
+PRT03 - 2010 : 251
+PRT03 - 2011 : 231
+PRT03 - 2012 : 317
+
+-- processos judiciais coi (PJ coi) 
+PRT03 - 2010 : 11670
+PRT03 - 2011 : 11069
+PRT03 - 2012 : 8302
+
+----------------------------
+
+denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT09 - 2010 : 4077
+PRT09 - 2011 : 3827
+PRT09 - 2012 : 4595
+
+-- processos judiciais codin (PAJ codin)
+PRT09 - 2010 : 679
+PRT09 - 2011 : 384
+PRT09 - 2012 : 435
+
+-- processos judiciais coi (PJ coi) 
+PRT09 - 2010 : 7903
+PRT09 - 2011 : 7556
+PRT09 - 2012 : 8544
+
+---------------------------------
+denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT02 - 2010 : 3812
+PRT02 - 2011 : 4795
+PRT02 - 2012 : 7305
+
+-- processos judiciais codin (PAJ codin)
+PRT02 - 2010 : 503
+PRT02 - 2011 : 229
+PRT02 - 2012 : 220
+
+-- processos judiciais coi (PJ coi) 
+PRT02 - 2010 : 6322
+PRT02 - 2011 : 12646
+PRT02 - 2012 : 12866
+
+
+--------------------------------
+denuncias autuadas (codin, menos PAJ) - excluindo denuncias que foram desativadas
+PRT04 - 2010 : 3452
+PRT04 - 2011 : 3467
+PRT04 - 2012 : 4684
+
+-- processos judiciais codin (PAJ codin)
+PRT04 - 2010 : 516
+PRT04 - 2011 : 249
+PRT04 - 2012 : 291
+
+-- processos judiciais coi (PJ coi) 
+PRT04 - 2010 : 12422
+PRT04 - 2011 : 12962
+PRT04 - 2012 : 12863

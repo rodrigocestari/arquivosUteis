@@ -1,0 +1,411 @@
+con=Resource id #3
+
+------------------------------
+vmpt_andamento
+------------------------------
+id_andamento=2852127
+id_proc=195677
+dt_cadastro=09/02/1998
+dt_andamento=09/02/1998
+cod_tipo_andamento=REL
+andamento=Ao Juiz Relator MARILDA IZIQUE CHEBABI na Segunda Turma, em , por distribuição normal da classe Recursos.
+setor_destino=Gabinete Juiz MARILDA IZIQUE CHEBABI
+obs=Object
+
+
+id_andamento=2852170
+id_proc=239374
+dt_cadastro=09/02/1998
+dt_andamento=09/02/1998
+cod_tipo_andamento=REL
+andamento=Ao Juiz Relator MARILDA IZIQUE CHEBABI na Segunda Turma, em , por distribuição normal da classe Recursos.
+setor_destino=Gabinete Juiz MARILDA IZIQUE CHEBABI
+obs=Object
+
+
+id_andamento=2869764
+id_proc=161864
+dt_cadastro=16/02/1998
+dt_andamento=16/02/1998
+cod_tipo_andamento=RMS
+andamento=Remetido a(o) Gabinete Juiz MARILDA IZIQUE CHEBABI pela(o) Secretaria da Segunda Turma.
+setor_destino=Gabinete Juiz MARILDA IZIQUE CHEBABI
+obs=Object
+
+
+id_andamento=2869766
+id_proc=161046
+dt_cadastro=16/02/1998
+dt_andamento=16/02/1998
+cod_tipo_andamento=RMS
+andamento=Remetido a(o) Gabinete Juiz MARILDA IZIQUE CHEBABI pela(o) Secretaria da Segunda Turma.
+setor_destino=Gabinete Juiz MARILDA IZIQUE CHEBABI
+obs=Object
+
+
+id_andamento=2778493
+id_proc=232449
+dt_cadastro=12/01/1998
+dt_andamento=12/01/1998
+cod_tipo_andamento=REL
+andamento=Ao Juiz Relator MARILDA IZIQUE CHEBABI na Segunda Turma, em 12/01/1998, por distribuição normal da classe Recursos.
+setor_destino=Gabinete Juiz MARILDA IZIQUE CHEBABI
+obs=Object
+
+
+------------------------------
+vmpt_camara
+------------------------------
+id_rel_turma_camara=13
+descricao= 1ª Câmara
+
+
+id_rel_turma_camara=19
+descricao= 2ª Câmara
+
+
+id_rel_turma_camara=14
+descricao= 3ª Câmara
+
+
+id_rel_turma_camara=20
+descricao= 4ª Câmara
+
+
+id_rel_turma_camara=15
+descricao= 5ª Câmara
+
+
+id_rel_turma_camara=21
+descricao= 6ª Câmara
+
+
+id_rel_turma_camara=16
+descricao= 7ª Câmara
+
+
+id_rel_turma_camara=22
+descricao= 8ª Câmara
+
+
+id_rel_turma_camara=17
+descricao= 9ª Câmara
+
+
+id_rel_turma_camara=23
+descricao=10ª Câmara
+
+
+id_rel_turma_camara=18
+descricao=11ª Câmara
+
+
+id_rel_turma_camara=24
+descricao=12ª Câmara
+
+
+------------------------------
+vmpt_juiz
+------------------------------
+id_juiz=1059
+nome=FERDINAND GOMES DOS SANTOS
+
+
+id_juiz=1060
+nome=ROBERTO COSME RODRIGUES
+
+
+id_juiz=1074
+nome=NICOLA VASILI KUMOV
+
+
+id_juiz=1075
+nome=VALDEMAR VALDOMIRO FIORENTINO
+
+
+id_juiz=1077
+nome=JOSÉ DANIEL DA SILVEIRA
+
+
+------------------------------
+vmpt_proc
+------------------------------
+id_proc=741
+instancia=2
+processo=00500-1982-855-15-00-9 AP
+num_proc_unico=500
+ano_proc_unico=1982
+ident_origem=855
+trt_unico=15
+seq_unico=0
+dv_unico=9
+cod_tipo_proc=AP
+descricao=AGRAVO DE PETIÇÃO
+dt_autuacao=09/01/1990
+cod_turma=TU2
+qtd_vol=1
+qtd_diversos=2
+obs_diversos=A.PRINC. E EMB.
+qtd_apenso=1
+id_ultimo_andamento=6
+dt_ultimo_andamento=19/04/1991
+cod_tipo_ultimo_andamento=BXA
+ultimo_andamento=Baixa normal requerida por Setor de Protocolo e Informações.
+id_rel_turma_camara=
+id_juiz_relator=
+
+
+id_proc=11536
+instancia=2
+processo=00840-1986-001-15-00-6 AP
+num_proc_unico=840
+ano_proc_unico=1986
+ident_origem=1
+trt_unico=15
+seq_unico=0
+dv_unico=6
+cod_tipo_proc=AP
+descricao=AGRAVO DE PETIÇÃO
+dt_autuacao=07/01/1991
+cod_turma=TU4
+qtd_vol=2
+qtd_diversos=0
+obs_diversos=
+qtd_apenso=0
+id_ultimo_andamento=19
+dt_ultimo_andamento=27/09/1991
+cod_tipo_ultimo_andamento=BXA
+ultimo_andamento=Baixa normal requerida por Setor de Protocolo e Informações.
+id_rel_turma_camara=
+id_juiz_relator=550
+
+
+id_proc=56950
+instancia=2
+processo=01800-1992-028-15-00-9 RO
+num_proc_unico=1800
+ano_proc_unico=1992
+ident_origem=28
+trt_unico=15
+seq_unico=0
+dv_unico=9
+cod_tipo_proc=RO
+descricao=RECURSO ORDINÁRIO
+dt_autuacao=08/01/1993
+cod_turma=TU4
+qtd_vol=1
+qtd_diversos=0
+obs_diversos=
+qtd_apenso=0
+id_ultimo_andamento=46
+dt_ultimo_andamento=10/02/1995
+cod_tipo_ultimo_andamento=BXA
+ultimo_andamento=Baixa normal requerida por Setor de Protocolo e Informações.
+id_rel_turma_camara=
+id_juiz_relator=379
+
+
+id_proc=83454
+instancia=2
+processo=01017-1992-002-15-00-2 RO
+num_proc_unico=1017
+ano_proc_unico=1992
+ident_origem=2
+trt_unico=15
+seq_unico=0
+dv_unico=2
+cod_tipo_proc=RO
+descricao=RECURSO ORDINÁRIO
+dt_autuacao=11/01/1994
+cod_turma=TU4
+qtd_vol=1
+qtd_diversos=0
+obs_diversos=
+qtd_apenso=0
+id_ultimo_andamento=63
+dt_ultimo_andamento=20/10/1995
+cod_tipo_ultimo_andamento=BXA
+ultimo_andamento=Baixa normal requerida por Setor de Protocolo e Informações.
+id_rel_turma_camara=
+id_juiz_relator=255
+
+
+id_proc=120088
+instancia=2
+processo=00703-1992-033-15-00-4 AI
+num_proc_unico=703
+ano_proc_unico=1992
+ident_origem=33
+trt_unico=15
+seq_unico=0
+dv_unico=4
+cod_tipo_proc=AI
+descricao=AGRAVO DE INSTRUMENTO
+dt_autuacao=09/01/1995
+cod_turma=TU1
+qtd_vol=1
+qtd_diversos=0
+obs_diversos=
+qtd_apenso=0
+id_ultimo_andamento=74
+dt_ultimo_andamento=25/08/1995
+cod_tipo_ultimo_andamento=BXA
+ultimo_andamento=Baixa normal requerida por Setor de Protocolo e Informações.
+id_rel_turma_camara=
+id_juiz_relator=381
+
+
+------------------------------
+vmpt_config
+------------------------------
+tipo_andamento_autuacao=AUT
+tipo_andamento_procuradoria=PRT
+tipo_andamento_em_pauta=EPT
+
+
+------------------------------
+vmpt_orgao_julgador
+------------------------------
+cod_turma=TU1
+descricao=Primeira Turma
+ind_ativa=S
+
+
+cod_turma=TU2
+descricao=Segunda Turma
+ind_ativa=S
+
+
+cod_turma=TU3
+descricao=Terceira Turma
+ind_ativa=S
+
+
+cod_turma=TU4
+descricao=Quarta Turma
+ind_ativa=S
+
+
+cod_turma=TU5
+descricao=Quinta Turma
+ind_ativa=S
+
+
+cod_turma=SEP
+descricao=Seção Especializada (Comp. Recursal)
+ind_ativa=S
+
+
+cod_turma=SET
+descricao=Seção Especializada (Comp. Originária)
+ind_ativa=N
+
+
+cod_turma=DI1
+descricao=1ª Seção de Dissídios Individuais
+ind_ativa=S
+
+
+cod_turma=DI
+descricao=Dissídios Individuais
+ind_ativa=N
+
+
+cod_turma=NOR
+descricao=Normativo
+ind_ativa=N
+
+
+cod_turma=ORG
+descricao=Órgão Especial
+ind_ativa=N
+
+
+cod_turma=TPL
+descricao=Tribunal Pleno
+ind_ativa=S
+
+
+cod_turma=CRG
+descricao=Corregedoria
+ind_ativa=S
+
+
+cod_turma=PSD
+descricao=Presidência
+ind_ativa=S
+
+
+cod_turma=TU6
+descricao=Sexta Turma
+ind_ativa=S
+
+
+cod_turma=SDC
+descricao=Seção de Dissídios Coletivos
+ind_ativa=S
+
+
+cod_turma=DI2
+descricao=2ª Seção de Dissídios Individuais
+ind_ativa=S
+
+
+cod_turma=TPA
+descricao=Tribunal Pleno - Administrativo
+ind_ativa=S
+
+
+cod_turma=DG
+descricao=Diretoria Geral
+ind_ativa=S
+
+
+cod_turma=GT1
+descricao=1º Grupo de Turmas
+ind_ativa=N
+
+
+cod_turma=GT2
+descricao=2º Grupo de Turmas
+ind_ativa=N
+
+
+------------------------------
+vmpt_rel_parte_docident
+------------------------------
+id_parte=629919
+cod_tipo_doc_ident=CPF
+pessoa=Cadastro de Pessoa Física
+ind_pessoa=F
+num_doc_ident=62766902872
+
+
+id_parte=629920
+cod_tipo_doc_ident=CTPS
+pessoa=Carteira de Trabalho e Previdência Social
+ind_pessoa=F
+num_doc_ident=74584606
+
+
+id_parte=629921
+cod_tipo_doc_ident=CPF
+pessoa=Cadastro de Pessoa Física
+ind_pessoa=F
+num_doc_ident=82418519872
+
+
+id_parte=629922
+cod_tipo_doc_ident=CNPJ
+pessoa=Cadastro Nacional de Pessoa Jurídica
+ind_pessoa=J
+num_doc_ident=12869038000184
+
+
+id_parte=629923
+cod_tipo_doc_ident=CPF
+pessoa=Cadastro de Pessoa Física
+ind_pessoa=F
+num_doc_ident=96592354887
+
+

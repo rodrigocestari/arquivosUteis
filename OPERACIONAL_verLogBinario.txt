@@ -1,0 +1,8 @@
+- pegar o arquivo de logbin nas pastas de backup da orion, descompactar e abrir no wordpad
+- CTRL + F para pesquisar a string desejada
+- casar com o log do apache em /var/log/httpd, exemplo : grep "23/Aug/2012" access_log* | grep "POST /codin/arqden/denuncia.php"
+
+
+comando pegar filtrando por algo (no caso um ip) e periodo :
+mysqlbinlog --no-defaults --start-datetime="2014-03-10 00:00:01" --stop-datetime="2014-03-10 23:59:00" --database=PRT15 /var/lib/mysql/mysql-bin.[0-1000]* | grep -w 95.141.28.122 > binlog1003IP.txt
+

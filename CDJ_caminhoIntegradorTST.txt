@@ -1,0 +1,4 @@
+https://homologacao.pgt.mpt.gov.br/projetos/0077-TSTParecer-Java/trunk/01-Sistema/06-Implementacao/01-Aplicacao/TSTParecer-MPTDigital/target/
+
+usuario:ricardo.porto
+senha:ricardo

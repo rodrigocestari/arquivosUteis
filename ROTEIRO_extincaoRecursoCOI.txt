@@ -1,0 +1,79 @@
+﻿1. Adequar script de migracao
+update CC_menu set men_ativo='N' where men_url like '%assuntopa_relacao.php%';
+
+
+1.1 movimentos (NAO ticar migracao de configuracao)
+
+SQLs :
+-- torna movimentos de RE visiveis na ferramenta de migracao
+update SI_tramite set tmt_tabelanacional='N' where tmt_tipo='RE' and tmt_ativo='S';
+
+-- insere o novo tramite
+INSERT INTO `SI_tramite` VALUES (678300520, 'Devolvido. Com CONTESTAÇÃO/CONTRARAZÕES', NULL, 'S', 'N', 'DEV', 'S', 'PJ', 'N', 'N', 'S', 'N', NULL, 'N', 920198, NULL, 'S', 'N', 'N');
+
+-- desativa o tramite de prazo de RE
+update SI_tramite set tmt_ativo='N' where tmt_alias='RE_PRAZO';
+	 
+tabela de conversao de movimento RE em PJ :
+De	Para
+RE: Em Cadast  PJ: Em Cadastr
+RE: Rec. do Judiciário  PJ: Rec. do Judiciário 
+RE: Sent/Acórdão Rec. Judiciário  PJ: Rec. do Judiciário **
+RE: Sent./Acórdão Apto à Conclusão.	PJ: Apto à Distribuição
+RE: Apto à Vista   PJ: Apto à Distribuição
+RE: VISTA de membro	PJ: Distribuído  **
+RE: Sentença/Acórdão. VISTA ao Procurador	 PJ: Distribuído  **
+RE: Ciência/Acórdão DESFAVORÁVEL	PJ: Ciência/Acórdão DESFAVORÁVEL
+RE: Ciência/Acórdão FAVORÁVEL INTEGRALMENTE	PJ: Ciência/Acórdão FAVORÁVEL INTEGRALMENTE
+RE: Ciência/Acórdão FAVORÁVEL PARCIALMENTE	PJ: Ciência/Acórdão FAVORÁVEL PARCIALMENTE
+RE: Vista Cancelada 	PJ: Devolvido. Para REDISTRIBUIÇÃO
+RE: Sentença/Acórdão. Vista Cancelada	PJ: Devolvido. Para REDISTRIBUIÇÃO **
+RE: Devolvido. Com CONTESTAÇÃO   PJ: Devolvido. Com Contestação/Contrarrazões
+RE: Devolvido. Com CONTRARRAZÕES PJ: Devolvido. Com Contestação/Contrarrazões
+RE: Disponível para DEVOLUÇÃO AO JUDICIÁRIO  PJ: Disponível para DEVOLUÇÃO AO JUDICIÁRIO
+RE: Devolvido. Com RECURSO interposto   PJ: Devolvido. Com RECURSO interposto
+RE: REMETIDO ao Judiciário	PJ: REMETIDO ao Judiciário
+RE: Sentença/Acórdão Arquivado em secretaria  PJ: REMETIDO ao Judiciário  **
+RE: Devolvido. Com CIÊNCIA  PJ: Devolvido. Com CIÊNCIA
+RE: Sentença/Acórdão. EXAMINADO	 PJ: Devolvido. Com CIÊNCIA **
+
+
+1.2 naturezas COI (ticar migracao de configuracao)  .. nao recomendavel migrar, tipos de parte vao ficar errado
+
+/*
+-- desativa naturezas que não constam em nenhum processo
+update SI_natureza set nat_ativo='N' where nat_idnatureza not in (select nat_idnatureza from SI_processopj);
+
+-- torna as naturezas visiveis na ferramenta de migracao
+update SI_natureza set nat_tabelanacional='N' where nat_ativo = 'S';
+
+-- cria campo para armazenar valor anterior
+alter table SI_partepj add tpp_idtipoparte_anterior mediumint(9) null after tpp_idtipoparte;
+*/
+
+-- desativar classes coi atuais
+update SI_natureza set nat_ativo='N';
+-- inserir tabela de classes coi com tabelanacional=S	
+le_planilha_classes.php :
+
+
+1.3 naturezas CODIN
+
+-- desativa naturezas que não constam em nenhum processo
+update CO_acao set status=0 where status=1 and seq not in (select tipo_acao from CO_pa_acao);
+
+-- torna as naturezas visiveis na ferramenta de migracao
+update CO_acao set tabelanacional='N' where status=1;
+
+-- inserir tabela de classes codin com tabelanacional=S	na CO_acao
+le_planilha_classes.php :
+
+
+le_planilha_classes.php :
+INSERT INTO `PRT15`.`SI_natureza` (`nat_idnatureza`, `nat_codigocnmp`, `nat_nome`, `nat_sigla`, `nat_descricao`, `nat_tipo`, `nat_dtalteracao`, `nat_tabelanacional`) VALUES (6781000, 236, 'Oposição', 'Oposic', '', 'PJ', '2015-05-14 14:40:28', 'S');
+INSERT INTO `PRT15`.`SI_tipoparte` (`tpp_nome`, `tpp_classificacao`) VALUES ('Opoente', '1');
+INSERT INTO `PRT15`.`SI_tipoparte` (`tpp_nome`, `tpp_classificacao`) VALUES ('Oposto', '2');
+INSERT INTO `PRT15`.`SI_naturezatipoparte` (`nat_idnatureza`, `tpp_idtipoparte`) VALUES (6781000, 136);
+INSERT INTO `PRT15`.`SI_naturezatipoparte` (`nat_idnatureza`, `tpp_idtipoparte`) VALUES (6781000, 137);
+
+

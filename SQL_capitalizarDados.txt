@@ -1,0 +1,62 @@
+update SI_oficio set ofc_nome=UC_DELIMETER(ofc_nome,' ',FALSE);
+update CC_setor set setor=UC_DELIMETER(setor,' ',FALSE);
+update CC_usuario set usuario=UC_DELIMETER(usuario,' ',FALSE);
+update CC_procurador set procurador=UC_DELIMETER(procurador,' ',FALSE);
+select * from SI_oficio;
+select * from CC_setor ;
+select * from CC_usuario;
+select * from CC_procurador;
+
+update CC_menu set men_titulo='Informações sobre os convênios' where men_url like '%interface/convenios.pdf%' limit 1;
+
+update CC_usuario set usuario='Gestão do Sistema' where status=1 and matricula='admin' limit 1;
+
+
+
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS `UC_FIRST`$$
+
+CREATE FUNCTION UC_FIRST(oldWord VARCHAR(255)) RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+SET @regresar := oldWord;
+IF LENGTH(oldWord) > 3 THEN
+  SET @regresar := CONCAT(UCASE(SUBSTRING(oldWord, 1, 1)),SUBSTRING(oldWord, 2));
+END IF;
+RETURN @regresar;
+END$$
+
+DROP FUNCTION IF EXISTS UC_DELIMETER$$
+
+CREATE FUNCTION UC_DELIMETER(oldName VARCHAR(255), delim VARCHAR(1), trimSpaces BOOL) RETURNS VARCHAR(255) DETERMINISTIC
+BEGIN
+SET @oldString := LCASE(oldName);
+SET @newString := "";
+
+tokenLoop: LOOP
+  IF trimSpaces THEN
+    SET @oldString := TRIM(BOTH " " FROM @oldString);
+  END IF;
+
+  SET @splitPoint := LOCATE(delim, @oldString);
+
+  IF @splitPoint = 0 THEN      
+      IF LENGTH(@newString) > 0 THEN
+        SET @newString := CONCAT(@newString, delim, UC_FIRST(@oldString));
+      ELSE
+        SET @newString := CONCAT(@newString, UC_FIRST(@oldString));
+      END IF;
+      LEAVE tokenLoop;        
+  END IF;
+
+  IF LENGTH(@newString) > 0 THEN
+    SET @newString := CONCAT(@newString, delim, UC_FIRST(SUBSTRING(@oldString, 1, @splitPoint - 1)));
+  ELSE
+    SET @newString := CONCAT(@newString, UC_FIRST(SUBSTRING(@oldString, 1, @splitPoint - 1)));
+  END IF;
+  SET @oldString := SUBSTRING(@oldString, @splitPoint+1);
+END LOOP tokenLoop;
+
+RETURN CONCAT(UCASE(SUBSTRING(@newString, 1, 1)),SUBSTRING(@newString, 2));
+END$$
+DELIMITER ;

@@ -1,0 +1,1 @@
+call MPTD.procConsultaTab('0', 'regiao,estado,regional as TIPO,concat("00",numeral_oficio) as codigo','PRT.CC_regiao',' status=1', '',' order by estado,codigo');

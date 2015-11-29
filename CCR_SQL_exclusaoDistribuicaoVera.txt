@@ -1,0 +1,148 @@
+-- identifica as distribuicoes que nao deviam ter sido feitas da dra vera
+select concat("update CO_historico set status=0 where seq=",a.seq," limit 1;"),
+		 (select h.seq from CO_historico h
+			 where h.processo=a.processo
+			 		 and h.andamento in (678201710)  
+			 		 and h.status=1 
+			 		 and h.datah>a.datah
+		 		    and h.datah<'2014-12-03 23:00'
+			 		 order by h.datah desc, h.seq desc limit 1) as redist 
+from CO_historico a where a.status=1 
+-- and a.processo=5368 
+and a.banca=21 and a.procurador=21 and a.andamento=678201190 and a.datah>='2014-12-01 00:00' and a.datah<='2014-12-02 23:00' 
+having  redist is not null;
+
+
+update CO_historico set status=0 where seq=18884 limit 1;	
+update CO_historico set status=0 where seq=18888 limit 1;	
+update CO_historico set status=0 where seq=18907 limit 1;	
+update CO_historico set status=0 where seq=19814 limit 1;	
+update CO_historico set status=0 where seq=19819 limit 1;	
+update CO_historico set status=0 where seq=19824 limit 1;	
+update CO_historico set status=0 where seq=19829 limit 1;	
+update CO_historico set status=0 where seq=19834 limit 1;	
+update CO_historico set status=0 where seq=19839 limit 1;	
+update CO_historico set status=0 where seq=19844 limit 1;	
+update CO_historico set status=0 where seq=19849 limit 1;	
+update CO_historico set status=0 where seq=19854 limit 1;	
+update CO_historico set status=0 where seq=19859 limit 1;	
+update CO_historico set status=0 where seq=19864 limit 1;	
+update CO_historico set status=0 where seq=19869 limit 1;	
+update CO_historico set status=0 where seq=19874 limit 1;	
+update CO_historico set status=0 where seq=19879 limit 1;	
+update CO_historico set status=0 where seq=19884 limit 1;	
+update CO_historico set status=0 where seq=19889 limit 1;	
+update CO_historico set status=0 where seq=19894 limit 1;	
+update CO_historico set status=0 where seq=19899 limit 1;	
+update CO_historico set status=0 where seq=19904 limit 1;	
+update CO_historico set status=0 where seq=19909 limit 1;	
+update CO_historico set status=0 where seq=19914 limit 1;	
+update CO_historico set status=0 where seq=19919 limit 1;	
+update CO_historico set status=0 where seq=19924 limit 1;	
+update CO_historico set status=0 where seq=19929 limit 1;	
+update CO_historico set status=0 where seq=19934 limit 1;	
+update CO_historico set status=0 where seq=19939 limit 1;	
+update CO_historico set status=0 where seq=19944 limit 1;	
+update CO_historico set status=0 where seq=19949 limit 1;	
+update CO_historico set status=0 where seq=19954 limit 1;	
+update CO_historico set status=0 where seq=19959 limit 1;	
+update CO_historico set status=0 where seq=19964 limit 1;	
+update CO_historico set status=0 where seq=19969 limit 1;	
+update CO_historico set status=0 where seq=19974 limit 1;	
+update CO_historico set status=0 where seq=19979 limit 1;	
+update CO_historico set status=0 where seq=19984 limit 1;	
+update CO_historico set status=0 where seq=19989 limit 1;	
+update CO_historico set status=0 where seq=19994 limit 1;	
+update CO_historico set status=0 where seq=19999 limit 1;	
+update CO_historico set status=0 where seq=20004 limit 1;	
+update CO_historico set status=0 where seq=20009 limit 1;	
+update CO_historico set status=0 where seq=20014 limit 1;	
+update CO_historico set status=0 where seq=20019 limit 1;	
+update CO_historico set status=0 where seq=20024 limit 1;	
+update CO_historico set status=0 where seq=20029 limit 1;	
+update CO_historico set status=0 where seq=20034 limit 1;	
+update CO_historico set status=0 where seq=20039 limit 1;	
+update CO_historico set status=0 where seq=20044 limit 1;	
+update CO_historico set status=0 where seq=20049 limit 1;	
+update CO_historico set status=0 where seq=20054 limit 1;	
+update CO_historico set status=0 where seq=20059 limit 1;	
+update CO_historico set status=0 where seq=20064 limit 1;	
+update CO_historico set status=0 where seq=20069 limit 1;	
+update CO_historico set status=0 where seq=20074 limit 1;	
+update CO_historico set status=0 where seq=20079 limit 1;	
+update CO_historico set status=0 where seq=20084 limit 1;	
+update CO_historico set status=0 where seq=20089 limit 1;	
+update CO_historico set status=0 where seq=20094 limit 1;	
+update CO_historico set status=0 where seq=20099 limit 1;	
+update CO_historico set status=0 where seq=20104 limit 1;	
+update CO_historico set status=0 where seq=20109 limit 1;	
+update CO_historico set status=0 where seq=20114 limit 1;	
+update CO_historico set status=0 where seq=20119 limit 1;	
+update CO_historico set status=0 where seq=20124 limit 1;	
+update CO_historico set status=0 where seq=20129 limit 1;	
+update CO_historico set status=0 where seq=20134 limit 1;	
+update CO_historico set status=0 where seq=20139 limit 1;	
+update CO_historico set status=0 where seq=20144 limit 1;	
+update CO_historico set status=0 where seq=20149 limit 1;	
+update CO_historico set status=0 where seq=20154 limit 1;	
+update CO_historico set status=0 where seq=20159 limit 1;	
+update CO_historico set status=0 where seq=20164 limit 1;	
+update CO_historico set status=0 where seq=20169 limit 1;	
+update CO_historico set status=0 where seq=20174 limit 1;	
+update CO_historico set status=0 where seq=20179 limit 1;	
+update CO_historico set status=0 where seq=20184 limit 1;	
+update CO_historico set status=0 where seq=20189 limit 1;	
+update CO_historico set status=0 where seq=20194 limit 1;	
+update CO_historico set status=0 where seq=20199 limit 1;	
+update CO_historico set status=0 where seq=20204 limit 1;	
+update CO_historico set status=0 where seq=20209 limit 1;	
+update CO_historico set status=0 where seq=20214 limit 1;	
+update CO_historico set status=0 where seq=20219 limit 1;	
+update CO_historico set status=0 where seq=20224 limit 1;	
+update CO_historico set status=0 where seq=20229 limit 1;	
+update CO_historico set status=0 where seq=20234 limit 1;	
+update CO_historico set status=0 where seq=20239 limit 1;	
+update CO_historico set status=0 where seq=20244 limit 1;	
+update CO_historico set status=0 where seq=20249 limit 1;	
+update CO_historico set status=0 where seq=20254 limit 1;	
+update CO_historico set status=0 where seq=20259 limit 1;	
+update CO_historico set status=0 where seq=20264 limit 1;	
+update CO_historico set status=0 where seq=20269 limit 1;	
+update CO_historico set status=0 where seq=20274 limit 1;	
+update CO_historico set status=0 where seq=20279 limit 1;	
+update CO_historico set status=0 where seq=20284 limit 1;	
+update CO_historico set status=0 where seq=20524 limit 1;	
+update CO_historico set status=0 where seq=20529 limit 1;	
+update CO_historico set status=0 where seq=20534 limit 1;	
+update CO_historico set status=0 where seq=20539 limit 1;	
+update CO_historico set status=0 where seq=20544 limit 1;	
+update CO_historico set status=0 where seq=20549 limit 1;	
+update CO_historico set status=0 where seq=20554 limit 1;	
+update CO_historico set status=0 where seq=20559 limit 1;	
+update CO_historico set status=0 where seq=20564 limit 1;	
+update CO_historico set status=0 where seq=20569 limit 1;	
+update CO_historico set status=0 where seq=20574 limit 1;	
+update CO_historico set status=0 where seq=20579 limit 1;	
+update CO_historico set status=0 where seq=20584 limit 1;	
+update CO_historico set status=0 where seq=20589 limit 1;	
+update CO_historico set status=0 where seq=20594 limit 1;	
+update CO_historico set status=0 where seq=20599 limit 1;	
+update CO_historico set status=0 where seq=20604 limit 1;	
+update CO_historico set status=0 where seq=20609 limit 1;	
+update CO_historico set status=0 where seq=20614 limit 1;	
+update CO_historico set status=0 where seq=20619 limit 1;	
+update CO_historico set status=0 where seq=20624 limit 1;	
+update CO_historico set status=0 where seq=20629 limit 1;	
+update CO_historico set status=0 where seq=20634 limit 1;	
+update CO_historico set status=0 where seq=20639 limit 1;	
+update CO_historico set status=0 where seq=20644 limit 1;	
+update CO_historico set status=0 where seq=20649 limit 1;	
+update CO_historico set status=0 where seq=20754 limit 1;	
+update CO_historico set status=0 where seq=20759 limit 1;	
+update CO_historico set status=0 where seq=20764 limit 1;	
+update CO_historico set status=0 where seq=20769 limit 1;	
+update CO_historico set status=0 where seq=20774 limit 1;	
+update CO_historico set status=0 where seq=20779 limit 1;	
+update CO_historico set status=0 where seq=20784 limit 1;	
+update CO_historico set status=0 where seq=20789 limit 1;	
+update CO_historico set status=0 where seq=20794 limit 1;	

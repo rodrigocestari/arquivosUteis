@@ -1,0 +1,77 @@
+Para instalar
+----------------
+
+1)Instalar VMPlayer 5.x
+
+http://10.9.0.5/infra/VMware-player-5.0.1-894247.exe
+
+2)Unzipar RHEl5.8.DSV.7z
+
+3)Play no arquivo .vmx
+
+4)Mountar com nomes trunk e branch via hgfs (shared folder) as respectivas pastas "working copy" do drive local
+
+VM/settings/options/shared folder
+
+5)ajustar c:\windows\system32\drivers\etc\hosts com o ip recebido pela VM
+
+192.168.x.y  branch      branch.prtz.mpt.gov.br
+192.168.x.y  trunk       trunk.prtz.mpt.gov.br
+
+6)ajustar nos "working copy" pasta\global\includes\conf.php
+
+localhost
+PRT18
+root
+prtdb
+
+7) Editar no nome da maquina e registrar
+# vim /etc/sysconfig/network (mptdigital-dsv-roberto.prt9.mpt.gov.br) 
+# reiniciar
+# rhnreg_ks --serverUrl=https://cajubi.pgt.mpt.gov.br/XMLRPC --sslCACert=/usr/share/rhn/RHN-ORG-TRUSTED-SSL-CERT --activationkey=1-mptdigital --force
+
+8)testar no firefox com acesso direto (bypass de proxy)
+
+http://branch/interface/autentica.php
+http://trunk/interface/autentica.php 
+
+
+
+Para o debug
+--------------
+
+O segredo está no cliente do debugger; tem que colocar o IP da VMNet1, que é o .1 da rede
+
+Zend Debuggers Settings
+Debug Port: 10000
+Client Host/IP: 192.168.126.1
+Debug Response Timeout(ms): 50000
+
+XDEBUG e Eclipse (http://files.zend.com/help/Zend-Studio/zend-studio.htm#installing_xdebug.htm)
+-------------------
+1) Usar o http://xdebug.org/wizard.php e instalar o xdebug-2.2.6
+# tar -xvzf xdebug-2.2.6.tgz
+# cd xdebug-2.2.6
+# phpize
+# ./configure
+# make
+# cp modules/xdebug.so /usr/lib64/php/modules
+
+
+2) Editar o arquivo /etc/php.d/zend_debugger.ini e comentar 
+;zend_extension=/usr/lib64/php/modules/ZendDebugger.so
+;zend_debugger.allow_hosts = 192.168.0.0/16,10.0.0.0/8
+;zend_debugger.expose_remotely = allowed_hosts
+
+3) editar o arquivo /etc/php.ini e adicionar em Dynamic Extensions
+zend_extension = /usr/lib64/php/modules/xdebug.so
+xdebug.remote_enable = On
+xdebug.remote_autostart = Off
+xdebug.remote_handler = dbgp
+xdebug.remote_mode = req
+xdebug.remote_host = 192.168.234.1 (interface de rede WMnet8 do windows)
+xdebug.remote_port = 10002
+
+4) Reiniciar o php
+
+5) Excluir todos o BP 2) clean all projects

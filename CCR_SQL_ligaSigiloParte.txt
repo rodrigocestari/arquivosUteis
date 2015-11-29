@@ -1,0 +1,18 @@
+-- atualiza legado
+select -- a.seq,a.nome,a.sigilo,
+concat("update CO_parte set sigilo='",a.sigilo,"' where nome='",a.nome,"';")
+from CO_parte a,CO_proc_parte b,CC_integracaoPRTPGT c
+where a.seq=b.parte 
+-- and b.processo=86782
+and a.sigilo='S'
+and c.ipp_idprocedimento_origem=b.processo
+and c.ipp_tipointegracao='PRT_PARA_CCR' 
+and c.ipp_ativo='S'
+and c.ipp_enviado='S';
+
+-- desc CO_parte
+
+update CO_parte set sigilo='N' where sigilo not in ('S','N');
+alter table CO_parte change sigilo sigilo char(1) not null default 'N';
+
+-- select * from CO_parte where sigilo not in ('S','N');

@@ -1,0 +1,73 @@
+﻿PENDENCIAS :
+
+- publicar CAPI : 2974/3452
+- colocar no jira o tipo ORIENTACAO para encaminhamento e NAOSEAPLICA para resolucao.
+- OMG-20300 - rever script de cancelamento coi - coi/processopj/movimentacaocancelamento_verificar.php 
+- limpeza das tabelas das prts 
+	6.1.4	Ação: 	Regionais devem regularizar pendências existentes desde a ata 11, item 4.5, Devem providenciar o isolamento das VMs do MPT Digital, até 5 de dezembro de 2014 as PRTs 14, 16, 17 e 19. Apenas a 14 já o fez.
+	Objetivo: Terminar implantação do isolamento de VMs MPTD
+	O CETI delibera que a execução da operação requerida deverá ser realizada em até 10 dias úteis após a publicação desta ata. A não realização desse isolamento deverá ser comunicado pelo DTI/PGT ao Procurador-Chefe para providências, com reiteração da comunicação da pendência a cada 30 dias, enquanto ela perdurar. 
+- MPTD-3447 fazer sql de correcao
+- OMG-20738   https://assinatura.mpt.gov.br/prt15/processoEletronico/consultas/valida_assinatura.php?id=1402461&ca=3W8KMTC6T9KFGSD5  enviado email Luciano
+- unificar abordagem de criacao de anexos no mptd (sud,med,pele,triagem são diferentes) para uso na peticao do pje
+- questao da conversao html pdf/a - comprar ?
+- estatistica CCR no gaia (Fernando, Rodrigo)
+- mptbusca orgaos superiores (Fernando, Rodrigo)
+- implementacoes do pje (prt15,13,18) e novas funcionalidades 
+	Marcelo, Arenhart, Sobrinho, Chorfi, Boechat (intimacoes)
+- padronizacao de classes coi (Dr. Luis)
+- problema de gravacao de doc (prt15 e 3)
+- liberar uso do bloco de notas para todo mundo
+- inserir ordem de antiguidade no codin
+- colocar campo sexo,cpf e grau(se procurador) na pag principal do RH como obrigatorio
+- Resolver problema de performance (trava o banco) em consultas por conteudo de documento - tabela PE_conteudoarquivo - na prt15 ocupa 5gb de 12gb do banco, na prt2 3,3 de 8,4 (media de 40% do tamanho do banco)
+	Ver se TIKA/PE_conteudoarquivo se justificam/são eficazes - talvez prover pelo GSA - problema de licença que não será renovada - alternativa = solr
+- erro do paj + 2268 + 3270 replica ->chorfi
+- faltou publicar o integrador na prt21 (conferir)
+- remessa a outra PRT com historico CCR - MPTD-1974 - a pensar
+
+
+
+- retirada de tabelas/phps PRO_*
+- tirar menus e tabelas referente a estágio do sistema RH - RH/lib/menu.php (enviar sistema de estagio para arenhart, unica que usa)
+
+
+- unificar login em todos os sistemas
+
+	4.3 Apreciação de proposta para estabelecer autenticação única em recursos, sistemas e serviços de TI do MPT;
+
+	Buscando padronização, deliberou-se que todas as autenticações em recursos, sistemas e serviços de TI do MPT deverão ser realizadas através de nome.sobrenome ou
+	 nome.sobrenome@mpt.mp.br. Haverá mecanismo de verificação pelo qual, se acaso o usuário se esquecer de acrescentar o @mpt.mp.br 
+	(ou se houver num dado sistema eventual limitação de campos) os sistemas automaticamente validarão a credencial. Considerando que a credencial de login nome/sobrenome poderá ser alterada para o usuário, sistemas deverão ter esta possibilidade prevista, utilizando 
+	preferencialmente outros atributos persistentes do usuário como referências internas, para preservar trilhas de auditoria, permissões e outros controles.A integração com o Serviço de Diretório deverá ser realizada apenas para autenticação, sendo que operações de autorização deverão ser geridas e conduzidas por 
+	cada sistema. O cgDIRETORIO poderá apoiar a realização de ajustes necessários em sistemas.Todas as áreas de desenvolvimento serão notificadas pelo cGCTI, de modo a iniciar imediatamente os ajustes necessários em sistemas, inclusive aqueles a serem 
+	descontinuados à medida que as soluções nacionais (SIGA) sejam implantadas - excetuados os que já estão sendo descontinuados no primeiro semestre. 
+	As senhas deverão expirar, de início, a cada três meses (hoje não há qualquer política de expiração, o que compromete a segurança da informação), mediante 
+	aviso ao usuário em mensagem de correio a ser enviada com um mês de antecedência à expiração e com link direto para a ferramenta de atualização das credenciais. 
+	Ferramenta para atualização de senha será disponibilizada na intranet do MPT, além de a própria estação permitir isso.
+
+
+-----------------------------------------
+CCR,CRJ e CDJ
+- atualizar versao na CCR,CRJ e CDJ
+- habilitar login no AD na PGT
+
+-----------------------------------------
+CRJ
+- mecanismo de avocacao do PAJ da PRT na CRJ - melhorar
+
+
+
+
+------------------------------------------
+CCR
+- implementar integracao em REST para a CCR para substituir o java
+
+
+
+
+
+
+
+
+

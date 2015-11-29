@@ -1,0 +1,74 @@
+-- acha erro de documento (16/11 inicio)
+select c.pcd_seqorigem,arq.aqe_idarquivo,arq.aqe_caminhooriginal,e.dce_iddocumento
+from PE_processoeletronicodocumento b, PE_documentosituacao d, PE_procedimentoadministrativo c,
+PE_documento e LEFT JOIN PE_arquivo arq ON arq.dce_iddocumento=e.dce_iddocumento
+where d.dce_iddocumento=b.dce_iddocumento
+and e.dce_iddocumento=b.dce_iddocumento
+and c.pel_idprocessoeletronico=b.pel_idprocessoeletronico
+and d.sit_idsituacao <> 3
+and d.dsi_situacaoatual = 'S'
+and e.dce_ativo='S'
+and arq.aqe_idarquivo in (select ass.aqe_idarquivo from PE_arquivoassinatura ass where ass.aqa_dtinc>='2015-11-16 00:00')
+group by e.dce_iddocumento
+-- and a.dce_iddocumento=1454639
+order by 3 desc limit 1000;
+
+-- acha o erro com o log
+select c.pcd_seqorigem,arq.aqe_idarquivo,arq.aqe_caminhooriginal,a.* 
+from CC_logdocumentos_temp a, PE_processoeletronicodocumento b, PE_documentosituacao d, PE_procedimentoadministrativo c,
+PE_documento e LEFT JOIN PE_arquivo arq ON arq.dce_iddocumento=e.dce_iddocumento
+where a.dce_iddocumento=b.dce_iddocumento
+and a.dce_iddocumento=e.dce_iddocumento
+and d.dce_iddocumento=b.dce_iddocumento
+and c.pel_idprocessoeletronico=b.pel_idprocessoeletronico
+and d.sit_idsituacao <> 3
+and d.dsi_situacaoatual = 'S'
+and e.dce_ativo='S'
+and a.etapa_gravacao = 'assinatura'
+-- and a.log_data > '2015-11-25 10:30:00' 
+group by dce_iddocumento
+-- and a.dce_iddocumento=1454639
+order by 3 desc limit 1000;
+
+
+select * from CO_historico where seq=4407512;
+select * from PE_documento where dce_iddocumento=1454639;
+
+select
+((select count(1) from PE_documento a where 0 = 
+(select count(1) from PE_documento b where b.dce_iddocumento = a.dce_iddocumento - 1) and  a.dce_dtinc > '2015-11-06 00:00:00' and a.dce_dtinc < '2015-11-16 00:00:00')
+/
+(select count(1) from PE_documento a where a.dce_dtinc > '2015-11-06 00:00:00' and a.dce_dtinc < '2015-11-16 00:00:00'))* 100
+from dual;
+
+select
+((select count(1) from PE_documento a where 0 = 
+(select count(1) from PE_documento b where b.dce_iddocumento = a.dce_iddocumento - 1) and a.dce_dtinc > '2015-11-25 17:00:00')
+/
+(select count(1) from PE_documento a where a.dce_dtinc > '2015-11-25 17:00:00')) * 100
+from dual;
+
+
+-- cria o arquivo pelo sistema
+select * from CO_historico where seq in (4412840);
+select * from PE_arquivo where dce_iddocumento in (1450177,1457030);
+-- select * from PE_arquivo where aqe_idarquivo=1958788;
+select * from PE_documento where dce_iddocumento in (1442340);
+select * from PE_documentoproprietario where dce_iddocumento in (1450177,1457030);
+select * from CO_historico where seq in (4410142);
+select * from CC_logdocumentos_temp a where a.dce_iddocumento=1442116;
+
+select * from CC_logdocumentos_temp a where a.log_data>='2015-11-24 15:00:00' and a.log_data<='2015-11-24 16:00:00' and a.cc_usuario_seq=999;
+
+-- lancar o movimento
+select seq,matricula,procurador,idusuario from CC_procurador where procurador like '%everson%';
+select seq from CO_banca where oficial=143;
+select tipo from CO_processo where processo=89755;
+INSERT INTO `CO_historico` (`processo`, `tipo`, `datah`, `matricula`, 
+`horae`, `andamento`, `status`,  `banca`, 
+ `procurador`, `dtcancelamento`, `dtlancamento`, `dce_iddocumento`,
+  `cc_usuario_seq_inc`, `exibirlinkdocumento`) VALUES (88225, 678900080, '2015-11-16 14:01:28', '8753', '',
+   678201210, 1, 2, 143, NULL, '2015-11-16 13:34:28',1442340, 1243, 'S');
+
+-- acertar a situacao
+select * from PE_documentosituacao a where a.dce_iddocumento in (1442340);

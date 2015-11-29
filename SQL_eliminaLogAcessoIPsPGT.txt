@@ -1,0 +1,8 @@
+UPDATE PE_historicoacesso SET hsa_ativo = 'N' WHERE hsa_ip_remote_addr IN ('10.0.0.64','10.0.0.219','10.0.0.4','10.0.0.43');
+
+UPDATE CC_configuracaodefinicao SET cfd_tipo = 'TEXTO', cfd_tamanhomaximo=100, cfd_listavalores=NULL
+WHERE cfd_identificacao = 'IPS_SEM_LOG_ACESSO';
+
+SELECT @idval:=cfd_id FROM CC_configuracaodefinicao WHERE cfd_identificacao = 'IPS_SEM_LOG_ACESSO';
+
+INSERT INTO `CC_configuracaogeral` (`cfd_id`, `cfe_valor`) VALUES (@idval, '10.0.0.64,10.0.0.219,10.0.0.4,10.0.0.43');

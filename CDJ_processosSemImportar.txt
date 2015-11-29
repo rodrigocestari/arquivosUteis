@@ -1,0 +1,153 @@
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308341 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308339 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308343 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308345 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308347 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308349 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308351 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308353 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308355 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308357 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308359 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308361 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308363 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308365 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308367 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308369 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308371 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308373 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308375 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308377 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308379 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308381 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308383 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308385 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308387 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308389 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308391 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308393 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308395 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308397 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308399 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308401 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308403 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308405 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308407 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308409 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308411 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308413 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308415 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308417 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308419 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308421 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308423 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308425 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308427 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308429 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308431 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308433 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308435 limit 1;
+update SI_processopj set ppj_ativo='N' where ppj_idprocessopj=308437 limit 1;
+
+
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=61 and ppj_CNJdigito=23 and ppj_CNJano=2014 and ppj_CNJsegmento=5 and ppj_CNJregiao=8 and ppj_CNJorgao=0;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=10187 and ppj_CNJdigito=37 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=0;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=652 and ppj_CNJdigito=66 and ppj_CNJano=2014 and ppj_CNJsegmento=5 and ppj_CNJregiao=5 and ppj_CNJorgao=0;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2 and ppj_CNJdigito=16 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=19 and ppj_CNJorgao=6;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1664 and ppj_CNJdigito=90 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=446;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=13 and ppj_CNJdigito=62 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=122;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=32 and ppj_CNJdigito=15 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=14 and ppj_CNJorgao=8;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=106 and ppj_CNJdigito=18 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=4 and ppj_CNJorgao=18;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2778 and ppj_CNJdigito=36 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=35;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1680 and ppj_CNJdigito=82 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=89;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=225500 and ppj_CNJdigito=79 and ppj_CNJano=1990 and ppj_CNJsegmento=5 and ppj_CNJregiao=1 and ppj_CNJorgao=35;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1752 and ppj_CNJdigito=26 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=51;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=915 and ppj_CNJdigito=54 and ppj_CNJano=2010 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=67;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=839 and ppj_CNJdigito=37 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=42;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1053 and ppj_CNJdigito=58 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=52;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=183 and ppj_CNJdigito=44 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=1 and ppj_CNJorgao=62;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=83 and ppj_CNJdigito=70 and ppj_CNJano=2014 and ppj_CNJsegmento=5 and ppj_CNJregiao=22 and ppj_CNJorgao=104;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1474 and ppj_CNJdigito=74 and ppj_CNJano=2010 and ppj_CNJsegmento=5 and ppj_CNJregiao=19 and ppj_CNJorgao=10;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=87 and ppj_CNJdigito=18 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=23 and ppj_CNJorgao=136;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1717 and ppj_CNJdigito=60 and ppj_CNJano=2010 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=129;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1076 and ppj_CNJdigito=69 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=151;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1500 and ppj_CNJdigito=61 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=9 and ppj_CNJorgao=663;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2088 and ppj_CNJdigito=44 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=9 and ppj_CNJorgao=89;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=112 and ppj_CNJdigito=5 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=10 and ppj_CNJorgao=3;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=114 and ppj_CNJdigito=24 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=10 and ppj_CNJorgao=19;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=10078 and ppj_CNJdigito=82 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=6 and ppj_CNJorgao=9;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1127 and ppj_CNJdigito=29 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=15 and ppj_CNJorgao=92;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1594 and ppj_CNJdigito=87 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=21;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2670 and ppj_CNJdigito=52 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=311;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1394 and ppj_CNJdigito=65 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=317;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1553 and ppj_CNJdigito=14 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=315;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2593 and ppj_CNJdigito=17 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=61;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1081 and ppj_CNJdigito=20 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=54;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1607 and ppj_CNJdigito=83 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=431;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1017 and ppj_CNJdigito=74 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=65;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=17582 and ppj_CNJdigito=30 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=16 and ppj_CNJorgao=20;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=22 and ppj_CNJdigito=14 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=4 and ppj_CNJorgao=19;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=12 and ppj_CNJdigito=97 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=318;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=34 and ppj_CNJdigito=46 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=1 and ppj_CNJorgao=19;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=198 and ppj_CNJdigito=21 and ppj_CNJano=2011 and ppj_CNJsegmento=5 and ppj_CNJregiao=19 and ppj_CNJorgao=59;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1 and ppj_CNJdigito=98 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=19 and ppj_CNJorgao=58;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=920 and ppj_CNJdigito=69 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=4 and ppj_CNJorgao=663;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1527 and ppj_CNJdigito=74 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=37;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=126 and ppj_CNJdigito=54 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=21;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=189 and ppj_CNJdigito=62 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=447;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=201 and ppj_CNJdigito=96 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=2 and ppj_CNJorgao=311;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=1130 and ppj_CNJdigito=46 and ppj_CNJano=2012 and ppj_CNJsegmento=5 and ppj_CNJregiao=9 and ppj_CNJorgao=93;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=142200 and ppj_CNJdigito=55 and ppj_CNJano=2008 and ppj_CNJsegmento=5 and ppj_CNJregiao=1 and ppj_CNJorgao=15;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=15300 and ppj_CNJdigito=39 and ppj_CNJano=2009 and ppj_CNJsegmento=5 and ppj_CNJregiao=1 and ppj_CNJorgao=226;
+select * from SI_processopj where ppj_ativo='S' and ppj_CNJnumero=2109 and ppj_CNJdigito=93 and ppj_CNJano=2013 and ppj_CNJsegmento=5 and ppj_CNJregiao=22 and ppj_CNJorgao=1;
+
+6123201458
+1018737201352
+65266201455
+2162011519
+166490201252
+13622012515
+32152013514
+10618201354
+277836201252
+168082201152
+22550079199051
+1752262011515
+915542010515
+839372012515
+105358201252
+18344201151
+83702014522
+1474742010519
+87182013523
+1717602010515
+1076692011515
+150061201259
+208844201259
+11252013510
+114242013510
+1007882201356
+1127292012515
+159487201252
+267052201252
+139465201252
+155314201252
+259317201252
+108120201252
+160783201352
+101774201252
+17582302013516
+2214201354
+1297201352
+3446201251
+198212011519
+1982013519
+92069201254
+152774201252
+12654201352
+18962201352
+20196201352
+113046201259
+14220055200851
+1530039200951
+2109932013522

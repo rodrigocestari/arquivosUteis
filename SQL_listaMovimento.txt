@@ -1,0 +1,22 @@
+-- movimentos
+select a.seq, a.andamento, a.alias, a.classificacao, a.status,
+case a.status
+when 0 then 'ANDAMENTOS DESATIVADOS'
+when 1 then 'ANDAMENTOS INDIVIDUAIS'
+when 2 then 'ANDAMENTOS EM LOTES'
+when 3 then 'ABERTURA DE VOLUMES'
+when 4 then 'CONTROLE DE PA ADMINISTRATIVO'
+when 5 then 'CONTROLE DE PA JURIDICO'
+when 6 then 'ANDAMENTOS EM LOTES E SIMPLES'
+when 7 then 'LOTES/SIMPLES/PA'
+when 8 then 'RETIRAR DAS LISTAS'
+else a.status
+end as 'status_desc',
+a.mudastatus, a.novostatus,
+b.descricao as novostatus_desc, 
+a.retornastatus, a.retiraprazoresolucao69, a.retiraprazoresolucao69, a.exigesetor, a.exigetipoperito, a.exigeassessor, a.exigedadosextras, a.designacaoautomatica, a.mudaregiao, a.tabelanacional, a.desvio
+from CO_andamento a inner join CO_status_processo b on b.status=a.novostatus
+where a.status<>0 
+order by a.andamento; 
+
+

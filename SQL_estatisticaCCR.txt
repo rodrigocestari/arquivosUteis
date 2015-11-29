@@ -1,0 +1,563 @@
+DA PLANILHA ..									  
+
+-- PRIMEIRO QUADRO (POR TEMAS)  ------------------------------------------------------------------
+
+-- ARQUIVAMENTO, SEM RECURSO, HOMOLOGADO
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='RETORNO_ARQ_HOMOLOGADO_CCR'   -- homologado
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias!='atoorgaosuperiorvotorecurso'  -- sem recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+	
+-- ARQUIVAMENTO, SEM RECURSO, NAO HOMOLOGADO	
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='CCR_RETORNO_ARQ_NAOHOMOLOGADO'   -- nao homologado
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias!='atoorgaosuperiorvotorecurso'  -- sem recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+
+-- ARQUIVAMENTO, SEM RECURSO, REMESSA NAO CONHECIDA
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='RETORNO_ARQ_NAOCONHECIDO_CCR'   -- remessa nao conhecida
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias!='atoorgaosuperiorvotorecurso'  -- sem recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+		
+		
+		
+		
+-- ARQUIVAMENTO, COM RECURSO, HOMOLOGADO
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='RETORNO_ARQ_HOMOLOGADO_CCR'   -- homologado
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotorecurso'  -- com recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+		
+
+-- ARQUIVAMENTO, COM RECURSO, NAO HOMOLOGADO
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='CCR_RETORNO_ARQ_NAOHOMOLOGADO'   -- nao homologado
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotorecurso'  -- com recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+
+-- ARQUIVAMENTO, COM RECURSO, REMESSA NAO CONHECIDA
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and f.alias='RETORNO_ARQ_NAOCONHECIDO_CCR'   -- remessa nao conhecida
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotorecurso'  -- com recurso
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+
+-- CONFLITOS APRECIADOS
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel		
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'		
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotoconflitoatrib'  -- conflitos
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+
+-- REVISOES DE TAC APRECIADAS
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotorevisaotac'  -- revisao de tac
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+-- CONSULTAS APRECIADAS
+select distinct a.processo,
+		-- b.datah,tem.alias,
+		sp.descricao,
+		SUBSTR(tem.alias,1,3) as grupo,
+		(select tem1.descricao from CO_temario tem1 where SUBSTR(tem.alias,1,3)=SUBSTR(tem1.alias,1,3) and tem1.status=1 limit 1) as grupopai
+from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+ 	  CO_status_processo sp,
+	  CO_historico b,
+ 	  CO_temario tem, 	  
+ 	  CO_procxtema pt,	  
+	  PE_documento c,
+	  PE_tipodocumento d,
+	  CO_pautaitens e,
+	  CO_andamento f,
+	  CO_pauta g
+where a.processo=b.processo
+		and a.status=sp.status 
+		and a.processo=pt.processo
+		and tem.idtema=pt.idtema		
+		and a.processo=e.processo
+		and b.datah>='2015-07-01' and b.datah<='2015-07-31'	  
+		and b.andamento=f.seq
+		and c.dce_iddocumento=e.pit_iddocumentovotovencedor  -- voto vencedor registrado no painel
+		and c.tdc_idtipodocumento=d.tdc_idtipodocumento
+		and e.pta_idpauta=g.pta_idpauta
+		and g.pta_ativo='S'
+		and e.pit_movimentoaplicado not in (9,10,6)  -- retira conclusao vista, conclusao proc. diligencia (regra da painel) assim garante pegar o voto vencedor
+		and d.tdc_alias='atoorgaosuperiorvotoconsulta'  -- consulta apreciada
+		and b.status=1
+		and e.pit_ativo='S'
+order by grupo;
+
+
+
+
+-- SEGUNDO QUADRO (INDICADORES DE TRANSITO - QUADRO VERDE)  ------------------------------------------------------------------
+
+-- DISTRIBUIDOS
+select count(p.processo) as total,c.procurador
+-- processo,c.procurador 
+from CO_processo p LEFT JOIN CO_tipo t ON (p.tipo = t.seq),
+	  CO_historico a,CC_procurador c
+where a.status=1 
+		and p.processo=a.processo
+		and a.andamento in (678201190,678201710,678203012)
+--		and c.seq=35
+--		and a.processo in (291)
+		and a.procurador=c.seq
+		and a.datah>='2015-07-01' 
+		and a.datah<='2015-07-31'
+group by c.procurador;
+
+
+-- REDISTRIBUIDOS (SAIDA)
+select count(distinct(b.processo)) as total,c.procurador 
+from CO_distmov a,CO_historico b,CC_procurador c 
+where a.dmo_datamov>='2015-07-01' 
+		and a.dmo_procuradororigem=c.seq
+		and b.seq=a.dmo_idhistorico
+		and a.dmo_datamov<='2015-07-31' 
+		and a.dmo_ativo='S' 
+		-- and a.dmo_procuradororigem=35
+group by c.procurador;
+				
+				
+				
+-- DEVOLVIDOS
+select distinct(a.processo),c.procurador,c.seq,a.seq as devAtual,
+(select h.seq from CO_historico h
+	 where h.processo=a.processo
+	 		 and h.andamento in (678204200,678200560,678204141,678201180)
+	 		 and h.status=1 
+	 		 and h.datah<a.datah
+	 		 order by h.datah desc, h.seq desc limit 1) as devolucaoEncontradaAntes,
+(select h.seq from CO_historico h
+	 where h.processo=a.processo
+	 		 and h.andamento in (678201190,678201710,678203012,678200600)  -- 		
+	 		 and h.status=1 
+	 		 and h.datah<a.datah
+	 		 order by h.datah desc, h.seq desc limit 1) as distribuicaoEncontradaAntes,
+	(select h.seq from CO_historico h
+						 where h.processo=a.processo
+						 		 and h.andamento in (678200600)		
+						 		 and h.status=1 
+						 		 and h.datah>a.datah
+						 		 order by h.datah desc, h.seq desc limit 1) as diligenciaEncontradaDepois			 		 
+	from CO_historico a,CC_procurador c,CO_andamento d
+	where a.status=1 
+	--	 	and c.seq=21
+			and a.andamento=d.seq
+			and d.seq in (678204200,678200560,678204141,678201180)
+			and a.procurador=c.seq
+	  	 	and a.datah>='2015-07-01' 
+			and a.datah<='2015-07-31'
+			and a.processo not in (select b.processo from CO_historico b
+										  where b.processo=a.processo 
+										  		  and b.andamento in (678200600) 
+										        and b.status=1 
+												  and b.datah>a.datah
+												  and b.datah<='2015-07-31'
+												  )	
+   having -- c.seq=35 and 
+   		  (devAtual>distribuicaoEncontradaAntes) and 
+		  ((devolucaoEncontradaAntes is null) or (devolucaoEncontradaAntes is not null and devolucaoEncontradaAntes<distribuicaoEncontradaAntes)) and
+		  (diligenciaEncontradaDepois is null);				
+		  
+		  
+
+-- EM DILIGENCIA NA SECRETARIA DA CCR
+select count(processo) as total,c.procurador 
+from CO_historico a,CC_procurador c 
+where a.status=1 
+		-- and c.seq=35
+		and a.andamento in (678203003,678204202,678203001,678203005,678203002)
+		and a.procurador=c.seq 
+		and a.datah>='2015-07-01' and a.datah<='2015-07-31'
+group by c.procurador;
+
+
+	  
+-- DILIGENCIAS PENDENTES NAS REGIONAIS
+select count(processo) as total,c.procurador 
+from CO_historico a,CC_procurador c 
+where a.status=1 
+		-- and c.seq=35
+		and a.andamento=678200600
+		and a.procurador=c.seq 
+		and a.datah>='2015-07-01' and a.datah<='2015-07-31'
+group by c.procurador;
+
+
+-- DILIGENCIAS CUMPRIDAS
+select count(*) as total,t.procurador
+				from (
+				select  -- count(distinct(p.processo)) as total,
+				-- count(p.processo) as total,
+				-- count(*) as total,
+				-- p.processo,
+				c.procurador,c.seq,(select h.seq from CO_historico h,CO_andamento anda
+												 where h.processo=p.processo
+												 		 and anda.seq=h.andamento
+												 		 and anda.classificacao='CONFIRMAARQ'
+												 		 and h.status=1 
+												 		 and h.datah<a.datah
+												 		 and (h.andamento!=678200600)
+												 		 order by h.datah desc, h.seq desc limit 1) as ultimoNaoDiligencia,
+												(select h.seq from CO_historico h,CO_andamento anda
+												 where h.processo=p.processo
+												 		 and anda.seq=h.andamento
+												 		 and anda.classificacao='CONFIRMAARQ'
+												 		 and h.status=1 
+												 		 and h.datah<a.datah
+												 		 and (h.andamento=678200600)
+												 		 order by h.datah desc, h.seq desc limit 1) as ultimoDiligencia,
+											(select h.seq from CO_historico h
+												 where h.processo=a.processo
+												 		 and h.andamento in (678201190,678201710,678203012)		
+												 		 and h.status=1 
+												 		 and h.datah<a.datah
+												 		 order by h.datah desc, h.seq desc limit 1) as distribuicaoEncontradaAntes												 		 
+								from CO_processo p LEFT JOIN CO_tipo t ON (p.tipo = t.seq),
+									  CO_historico a,CC_procurador c
+								where a.status=1 
+										and p.processo=a.processo
+								--		and c.seq=35
+										and a.andamento=678200900
+								--		and a.processo=4302  
+									    and a.procurador=c.seq
+										and a.datah>='2015-07-01' and a.datah<='2015-07-31'	
+				--				group by c.procurador
+								having ((ultimoDiligencia>ultimoNaoDiligencia and ultimoDiligencia is not null and ultimoNaoDiligencia is not null) or (ultimoDiligencia is not null and ultimoNaoDiligencia is null)) and
+										 (distribuicaoEncontradaAntes<ultimoDiligencia)
+				) t 	group by t.procurador;
+		  
+		  
+		  
+		  
+		  
+
+
+
+-- AGUARDANDO DELIBERACAO DA CAMARA
+select count(processo) as total,c.procurador 
+from CO_historico a,CC_procurador c 
+where a.status=1 
+	--	and c.seq=35
+		and a.andamento in (678204141)
+		and a.procurador=c.seq 
+		and a.datah>='2015-07-01' and a.datah<='2015-07-31'
+group by c.procurador;	
+
+
+-- COM VISTA AO MEMBRO
+select count(processo) as total,c.procurador 
+from CO_historico a,CC_procurador c 
+where a.status=1 
+	--	and c.seq=35
+		and a.andamento in (678204143)
+		and a.procurador=c.seq 
+		and a.datah>='2015-07-01' and a.datah<='2015-07-31'
+group by c.procurador;
+
+				
+-- DELIBERADOS (DEVOLVIDOS, SEM DILIGENCIA, QUE NAO TENHAM NENHUM MOVIMENTO APOS A DEVOLUCAO DENTRO DO PERIODO
+select distinct(a.processo),c.procurador,c.seq,a.seq as devAtual,
+(select h.seq from CO_historico h
+	 where h.processo=a.processo
+	 		 and h.andamento in (678204200,678200560,678204141,678201180)
+	 		 and h.status=1 
+	 		 and h.datah<a.datah
+	 		 order by h.datah desc, h.seq desc limit 1) as devolucaoEncontradaAntes,
+(select h.seq from CO_historico h
+	 where h.processo=a.processo
+	 		 and h.andamento in (678201190,678201710,678203012,678200600)  -- 		
+	 		 and h.status=1 
+	 		 and h.datah<a.datah
+	 		 order by h.datah desc, h.seq desc limit 1) as distribuicaoEncontradaAntes,
+	(select h.seq from CO_historico h
+						 where h.processo=a.processo
+						 		 and h.andamento in (678200600)		
+						 		 and h.status=1 
+						 		 and h.datah>a.datah
+						 		 order by h.datah desc, h.seq desc limit 1) as diligenciaEncontradaDepois			 		 
+	from CO_historico a,CC_procurador c,CO_andamento d
+	where a.status=1 
+	--	 	and c.seq=21
+			and a.andamento=d.seq
+			and d.seq in (678204200,678200560,678204141,678201180)
+			and a.procurador=c.seq
+	  	 	and a.datah>='2015-07-01' 
+			and a.datah<='2015-07-31'
+			and a.processo not in (select b.processo from CO_historico b
+										  where b.processo=a.processo 
+										  		 -- and b.andamento in (678200600) 
+										        and b.status=1 
+												  and b.datah>a.datah
+												  and b.datah<='2015-07-31'
+												  )	
+   having -- c.seq=35 and 
+   		  (devAtual>distribuicaoEncontradaAntes) and 
+		  ((devolucaoEncontradaAntes is null) or (devolucaoEncontradaAntes is not null and devolucaoEncontradaAntes<distribuicaoEncontradaAntes)) and
+		  (diligenciaEncontradaDepois is null);				
+		  
+
+SALDO :
+
+-- "recebidos no mes" -> ENTRADA DE PROCEDIMENTOS		  
+select distinct(a.processo),b.tipo,
+					 concat(t.sigla,' ',lpad(a.numero,5,'0'),'.',a.ano,'.',lpad(a.regiao,2,'0'),'.',lpad(a.oficio,3,'0'),'-',a.digito) as procedimento
+			from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+				  CO_historico b
+			where b.status=1 
+					and a.processo=b.processo 
+					and b.andamento=678201560
+			--		and a.processo=888
+					and b.datah>='2015-07-01' and b.datah<='2015-07-31'
+					and b.processo not in (select c.processo from CO_historico c 
+												  where b.processo=c.processo 
+												        and c.status=1 
+														  -- and b.datah<'2014-11-01 00:00'
+														  and c.datah<b.datah
+														  and c.andamento=678201560);
+
+-- DISTRIBUIDOS NO MES														  
+select a.processo,b.procurador,b.tipo,
+					 concat(t.sigla,' ',lpad(a.numero,5,'0'),'.',a.ano,'.',lpad(a.regiao,2,'0'),'.',lpad(a.oficio,3,'0'),'-',a.digito) as procedimento
+			from CO_processo a LEFT JOIN CO_tipo t ON (a.tipo = t.seq),
+				  CO_historico b
+			where b.status=1 
+			   	and a.processo=b.processo 
+					and b.andamento in (678201190,678201710,678203012)
+			--		and a.processo in (291)
+					and b.datah>='2015-07-01' 
+					and b.datah<='2015-07-31';		
