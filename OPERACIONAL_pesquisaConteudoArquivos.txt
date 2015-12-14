@@ -1,0 +1,1 @@
+find /var/www/MPTDigital -name *.php -exec grep -l "select tmt_idtramite from SI_tramite a, SI_controletramite b where a.tmt_idtramite = b.ctt_tramiteorigem and a.tmt_ativo = 'S' and ctt_tramitedestino=" {} \; -print

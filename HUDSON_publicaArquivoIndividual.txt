@@ -1,0 +1,1 @@
+svn export http://homologacao.pgt.mpt.gov.br/svn/capi/trunk/consultas/_config_rais.php /var/www/MPTDigital/capi/consultas/_config_rais.php

@@ -1,0 +1,17 @@
+select "TESTE",count(b.andamento),b.andamento
+from CO_historico a,CO_andamento b
+where b.seq=a.andamento and a.status=1
+group by b.andamento
+
+select "PROD",count(b.andamento),b.andamento
+from CO_historico a,CO_andamento b
+where b.seq=a.andamento and a.status=1
+group by b.andamento;
+
+
+update CO_processo set situacao='NO_ARQUIVO' where situacaodata<='2014-01-01 00:00:00' and situacao='CONCLUSO_PROCURADOR' and processo not in (17999,18000,18904);
+
+select concat(processo,","),
+		(select count(processo) from CO_historico b where a.processo=b.processo and b.status=1 and b.datah>='2015-01-01 00:00' and b.datah<='2015-12-31 00:00') as total
+from CO_processo a where situacaodata<='2015-12-04 23:00:00' and situacao='PENDENTE_PROVIDENCIAS' and status not in (1,3,5) 
+having total=0

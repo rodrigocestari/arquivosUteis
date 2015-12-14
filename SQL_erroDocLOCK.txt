@@ -72,3 +72,42 @@ INSERT INTO `CO_historico` (`processo`, `tipo`, `datah`, `matricula`,
 
 -- acertar a situacao
 select * from PE_documentosituacao a where a.dce_iddocumento in (1442340);
+
+
+
+
+
+
+select * from PE_arquivo where aqe_idarquivo=1859511;
+select * from CC_logerro a where a.log_dataocorrencia>='2015-12-02 07:00' and a.log_dataocorrencia<='2015-12-02 20:00' and a.log_tipo='gGravaDocumento'
+select * from CC_logerro a where a.log_dataocorrencia>='2015-12-03 07:00' and a.log_dataocorrencia<='2015-12-03 20:00' and a.log_tipo='gGravaDocumento' and a.log_mensagem not like '%Erro ao tentar definir o caminho onde%' ;
+select * from CC_logerro a where a.log_dataocorrencia>='2015-12-04 07:00' and a.log_dataocorrencia<='2015-12-04 20:00' and a.log_tipo='gGravaDocumento';
+select * from CC_logdocumentos_temp a where a.log_data>='2015-12-01 15:15' and a.log_data<='2015-12-01 16:15';  a.log_data>='2015-12-02 10:15';   a.dce_iddocumento=1316966  
+select * from CC_log a where a.lgc_dhexecucao>='2015-12-02 10:15';
+select * from CC_logassinatura a where a.lga_dhexecucao>='2015-12-02 10:15';
+show engine innodb status;
+
+
+-- APOS MELHORIAS PHP (COM ALTERACAO DE BANCO) (%)
+select
+((select count(1) from PE_documento a where 0 = 
+(select count(1) from PE_documento b where b.dce_iddocumento = a.dce_iddocumento - 1)  and a.dce_dtinc > '2015-12-03 11:00:00')
+/
+(select count(1) from PE_documento a where a.dce_dtinc > '2015-12-03 11:00:00')) * 100
+from dual;
+
+
+select
+((select count(1) from PE_controlenumeracao a where date(a.ctl_dtinc) = '2015-12-03' and dce_iddocumento is null)
+/
+(select count(1) from PE_documento b where date(b.dce_dtinc) = '2015-12-03')) * 100
+from dual;
+
+
+-- APOS A ALTERACAO DE BANCO (0.3413%)
+select
+((select count(1) from PE_documento a where 0 = 
+(select count(1) from PE_documento b where b.dce_iddocumento = a.dce_iddocumento - 1)  and a.dce_dtinc > '2015-12-02 00:00:00' and a.dce_dtinc < '2015-12-02 10:50:00')
+/
+(select count(1) from PE_documento a where a.dce_dtinc > '2015-12-02 00:00:00' and a.dce_dtinc < '2015-12-02 10:50:00')) * 100
+from dual;

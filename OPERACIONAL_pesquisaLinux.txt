@@ -1,0 +1,4 @@
+ ls -lrth | more (lista formatando kbytes)
+ du -ks * | sort -n  (ordena por tamanho)
+ find . -mtime +0 -type f -exec ls -l {} \;  (lista arquivos do diretorio alterados a mais de 1 dia)
+ 

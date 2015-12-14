@@ -1,0 +1,39 @@
+SELECT 
+	a.seq AS HISTORICOSEQ, 
+	a.comentario AS HISTORICOCOMENTARIO, 
+	a.datah AS HISTORICODATAMYSQL, 
+	DATE_FORMAT(a.datah, '%d/%m/%Y') AS HISTORICODATABR, 
+	a.datae AS HISTORICODATAEVENTOMYSQL,
+	DATE_FORMAT(a.datae, '%d/%m/%Y') AS HISTORICODATAEVENTOBR, 
+	a.horae AS HISTORICOHORAEVENTO,
+	a.procurador AS HISTORICOPROCURADOR, 
+	a.banca AS HISTORICOBANCA, 
+	a.andamento AS ANDAMENTOSEQ, 
+	b.andamento AS ANDAMENTONOME, 
+	b.classificacao AS ANDAMENTOCLASSIFICACAO, 
+	b.mostrasite AS ANDAMENTOMOSTRASITE, 
+	b.destaque AS ANDAMENTODESTAQUE, 
+	a.dce_iddocumento AS DOCUMENTOID, 
+	d.dce_sigilo AS DOCUMENTOSIGILO, 
+	d.tdc_idtipodocumento AS DOCUMENTOTIPOID, 
+	f.tdc_nome AS DOCUMENTOTIPONOME, 
+	e.aqe_codigoacesso AS DOCUMENTOCODIGOACESSO, 
+	e.aqe_idarquivo AS IDARQUIVO,
+	IFNULL(c1.seq, IFNULL(c2.seq, c3.seq)) AS RESPONSAVELSEQ, 
+	IFNULL(c1.usuario, IFNULL(c2.usuario, c3.usuario)) AS RESPONSAVELNOME, 
+	IFNULL(c1.matricula, IFNULL(c2.matricula, c3.matricula)) AS RESPONSAVELMATRICULA,
+	f.tdc_alias AS MOVIMENTO
+	FROM 
+	CCR.CO_historico a 
+	INNER JOIN CCR.CO_andamento b ON b.seq = a.andamento -- AND b.seq <> 678201210
+	LEFT JOIN CCR.CC_usuario c1 ON c1.seq = a.cc_usuario_seq_inc 
+	LEFT JOIN CCR.CC_usuario c2 ON c2.matricula = a.matricula 
+	LEFT JOIN CCR.CC_usuario c3 ON c3.seq = a.matricula 
+	LEFT JOIN CCR.PE_documento d ON d.dce_iddocumento = a.dce_iddocumento AND d.dce_ativo = 'S'
+	LEFT JOIN CCR.PE_arquivo e ON e.dce_iddocumento = d.dce_iddocumento 
+	LEFT JOIN CCR.PE_tipodocumento f ON f.tdc_idtipodocumento = d.tdc_idtipodocumento AND f.tdc_alias not in ('certidaodistribuicaoconclusao')
+	WHERE 
+	a.processo = 24412
+	AND a.status = 1 
+	GROUP BY a.seq 
+	ORDER BY a.datah DESC, a.seq
